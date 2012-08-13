@@ -31,22 +31,22 @@
     DurationKeyboardView *viDurationKeyboard;
 }
 
-@property (retain, nonatomic) RunCalcModel *runCalcModel;
-@property (retain, nonatomic) IBOutlet UITextField *tfSpeed;
-@property (retain, nonatomic) IBOutlet UITextField *tfDistance;
-@property (retain, nonatomic) IBOutlet UITextField *tfDuration;
-@property (retain, nonatomic) IBOutlet UITextField *tfPace;
-@property (retain, nonatomic) IBOutlet UILabel *lblHalfMarathon;
-@property (retain, nonatomic) IBOutlet UILabel *lblMarathon;
-@property (retain, nonatomic) IBOutlet UILabel *lblSpeedUnit;
-@property (retain, nonatomic) IBOutlet UILabel *lblPaceUnit;
-@property (retain, nonatomic) IBOutlet UILabel *lblDistanceUnit;
-@property (retain, nonatomic) IBOutlet UISegmentedControl *scUnit;
-@property (retain, nonatomic) IBOutlet UIButton *bSpeedLocked;
-@property (retain, nonatomic) IBOutlet UIButton *bDistanceLocked;
-@property (retain, nonatomic) IBOutlet UIButton *bDurationLocked;
-@property (nonatomic, retain) IBOutlet NumericKeyboardView *viNumericKeyboard;
-@property (nonatomic, retain) IBOutlet DurationKeyboardView *viDurationKeyboard;
+@property ( nonatomic) RunCalcModel *runCalcModel;
+@property ( nonatomic) IBOutlet UITextField *tfSpeed;
+@property ( nonatomic) IBOutlet UITextField *tfDistance;
+@property ( nonatomic) IBOutlet UITextField *tfDuration;
+@property ( nonatomic) IBOutlet UITextField *tfPace;
+@property ( nonatomic) IBOutlet UILabel *lblHalfMarathon;
+@property ( nonatomic) IBOutlet UILabel *lblMarathon;
+@property ( nonatomic) IBOutlet UILabel *lblSpeedUnit;
+@property ( nonatomic) IBOutlet UILabel *lblPaceUnit;
+@property ( nonatomic) IBOutlet UILabel *lblDistanceUnit;
+@property ( nonatomic) IBOutlet UISegmentedControl *scUnit;
+@property ( nonatomic) IBOutlet UIButton *bSpeedLocked;
+@property ( nonatomic) IBOutlet UIButton *bDistanceLocked;
+@property ( nonatomic) IBOutlet UIButton *bDurationLocked;
+@property (nonatomic) IBOutlet NumericKeyboardView *viNumericKeyboard;
+@property (nonatomic) IBOutlet DurationKeyboardView *viDurationKeyboard;
 
 - (IBAction)convert: (id) sender;
 - (IBAction)selectUnit:(id)sender;

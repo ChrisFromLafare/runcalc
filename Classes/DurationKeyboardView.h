@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface DurationKeyboardView : UIView <UIPickerViewDelegate, UIPickerViewDataSource>  {
-    id <UITextInput> delegate;
+    id <UITextInput> __unsafe_unretained delegate;
 }
 
-@property (nonatomic, assign) id <UITextInput> delegate;
+@property (nonatomic, unsafe_unretained) id <UITextInput> delegate;
 
 -(void) setKeyboardValue:(NSString *)aString;
 @end

@@ -24,9 +24,9 @@
     enum RCUnit {UNIT_KM, UNIT_MI} unit;
 }
 
-@property (retain, nonatomic) RCSpeed *speed;
-@property (retain, nonatomic) RCDistance *distance;
-@property (retain, nonatomic) RCTimeInterval *duration;
+@property (nonatomic) RCSpeed *speed;
+@property (nonatomic) RCDistance *distance;
+@property (nonatomic) RCTimeInterval *duration;
 @property (assign, nonatomic) enum RCUnit unit;
 
 - (id) initWithDistance: (RCDistance *) aDistance andSpeed: (RCSpeed *) aSpeed;

@@ -21,9 +21,7 @@
 	self = [super init];
 	if (self) {
 		speed = aSpeed;
-        [speed retain];
 		distance = aDistance;
-        [distance retain];
         duration = [[RCTimeInterval alloc] init];
 		[self.duration fromSpeed:aSpeed andDistance:aDistance];
         
@@ -35,9 +33,7 @@
 	self = [super init];
 	if (self) {
 		speed = aSpeed;
-        [speed retain];
 		duration = aDuration;
-        [duration retain];
         distance = [[RCDistance alloc] init];
         [distance fromSpeed:aSpeed andDuration:aDuration];
 	}
@@ -48,9 +44,7 @@
 	self = [super init];
 	if (self) {
 		duration = aDuration;
-        [duration retain];
 		self.distance = aDistance;
-        [distance retain];
         speed = [[RCSpeed alloc] init];
         [speed fromDistance:aDistance andDuration:aDuration];
 	}
@@ -66,8 +60,6 @@
 
 - (void) setSpeed:(RCSpeed *)speedValue {
     if (speedValue != speed) {
-        [speedValue retain];
-        [speed release];
         speed = speedValue;
         [duration fromSpeed:self.speed andDistance:self.distance];
     }
@@ -79,8 +71,6 @@
 
 - (void) setDistance:(RCDistance *)distanceValue {
     if (distanceValue != distance) {
-        [distanceValue retain];
-        [distance release];
         distance = distanceValue;
         [self.speed fromDistance:self.distance andDuration:self.duration];
     }
@@ -92,8 +82,6 @@
 
 - (void)setDuration:(RCTimeInterval *)durationValue {
     if (duration != durationValue) {
-        [durationValue retain];
-        [duration release];
         duration = durationValue;
         [self.distance fromSpeed:self.speed andDuration:self.duration];
     }
@@ -103,10 +91,9 @@
 #pragma mark Duration at fixed speed
 
 -(RCTimeInterval *) getDurationForDistance:(float)aDistance {
-    RCTimeInterval *dur = [[[RCTimeInterval alloc] init] autorelease];
+    RCTimeInterval *dur = [[RCTimeInterval alloc] init];
     RCDistance *dist = [[RCDistance alloc] initWithDistance:aDistance];
     [dur fromSpeed:self.speed andDistance:dist];
-    [dist release];
     return dur;
 }
 
@@ -136,7 +123,6 @@
     self.duration = nil;
     self.distance = nil;
     self.speed = nil;
-    [super dealloc];
 }
 
 @end

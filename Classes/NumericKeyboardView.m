@@ -16,8 +16,8 @@
     UILabel *lblDecDot;
 }
 
-@property (nonatomic, retain) IBOutlet UIPickerView *picker;
-@property (nonatomic, retain) IBOutlet UILabel *lblDecDot;
+@property (nonatomic) IBOutlet UIPickerView *picker;
+@property (nonatomic) IBOutlet UILabel *lblDecDot;
 
 @end
 
@@ -38,12 +38,6 @@
 - (void)awakeFromNib {
     leadingZeros = NO;
     lblDecDot.text = [[NSLocale currentLocale] objectForKey:NSLocaleDecimalSeparator];    
-}
-- (void)dealloc
-{
-    self.picker = nil;
-    self.lblDecDot = nil;
-    [super dealloc];
 }
 
 #pragma mark -

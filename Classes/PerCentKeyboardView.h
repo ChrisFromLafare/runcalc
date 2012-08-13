@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface PerCentKeyboardView : UIView <UIPickerViewDelegate, UIPickerViewDataSource>  {
-    id <UITextInput> delegate;
+    id <UITextInput> __unsafe_unretained delegate;
     bool leadingZeros;
 }
 
-@property (nonatomic, assign) id <UITextInput> delegate;
+@property (nonatomic, unsafe_unretained) id <UITextInput> delegate;
 @property (nonatomic, assign) bool leadingZeros;
 
 -(void) setKeyboardValue:(NSString *)aNumber;

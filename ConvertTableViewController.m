@@ -34,13 +34,10 @@
     UIViewController *v = [[DistanceConvViewController alloc] initWithNibName:nil bundle:nil];
     v.title = @"Distances";
     [a addObject:v];
-    [v release];
     v = [[SpeedConvViewController alloc] initWithNibName:nil bundle:nil];
     v.title = @"Speed";
     [a addObject:v];
-    [v release];
     self.controllers = a;
-    [a release];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -80,7 +77,7 @@
     static NSString *CellIdentifier = @"ConvertersCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ConvertersCell"] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ConvertersCell"];
     }
     cell.textLabel.text = [[controllers objectAtIndex:indexPath.row] title];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

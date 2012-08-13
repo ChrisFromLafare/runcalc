@@ -52,7 +52,6 @@
 
 -(void)dealloc {
     [self viewDidUnload];
-    [super dealloc];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -82,7 +81,6 @@
         RCDistance *distanceKm = [distance toKm];
         tfKm.text = [distanceKm stringValue];
     }
-    [distance release];
 }
 
 - (IBAction)backgroundTouched:(id)sender {

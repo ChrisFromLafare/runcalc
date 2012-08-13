@@ -15,8 +15,8 @@
     UITabBarController *tabBarController;
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
-@property (nonatomic, retain) IBOutlet ConvertTableViewController *convertTableViewController;
-@property (nonatomic, retain) IBOutlet HRateTableViewController *hRateTableViewController;
+@property (nonatomic) IBOutlet UIWindow *window;
+@property (nonatomic) IBOutlet UITabBarController *tabBarController;
+@property (nonatomic) IBOutlet ConvertTableViewController *convertTableViewController;
+@property (nonatomic) IBOutlet HRateTableViewController *hRateTableViewController;
 @end

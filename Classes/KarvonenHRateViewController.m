@@ -182,9 +182,7 @@
         [tempRates addObject:[NSString stringWithFormat:@"%3d",
                               [heartRate PerCentKarvonen: 1 - 0.05 * i]]];
     }
-    [heartRate release];
     self.rates = tempRates;
-    [tempRates release];
     [tvRates reloadData];
 }
 

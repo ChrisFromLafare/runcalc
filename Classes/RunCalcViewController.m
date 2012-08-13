@@ -47,8 +47,6 @@
     RCDistance *rd = [[RCDistance alloc] initWithDistance:1.0];
     runCalcModel = [[RunCalcModel alloc] initWithDistance:rd andSpeed:rs];
     runCalcModel.unit = UNIT_KM;
-    [rs release];
-    [rd release];    
     tfSpeed.text = [runCalcModel.speed stringValue];
     tfDistance.text = [runCalcModel.distance stringValue];
     tfDuration.text = [runCalcModel.duration stringValue];
@@ -106,7 +104,6 @@
 
 - (void)dealloc {
     [self viewDidUnload];
-    [super dealloc];
 }
 
 - (void) updateRuns {
@@ -121,16 +118,13 @@
         RCTimeInterval *rt = [[RCTimeInterval alloc] initWithString:tfDuration.text];
         runCalcModel = [[RunCalcModel alloc] initWithSpeed:rs andDuration:rt];
         tfDistance.text = [runCalcModel.distance stringValue];
-        [rt release];
     }
     else {
         RCDistance *rd = [[RCDistance alloc] initWithString: tfDistance.text];
         runCalcModel = [[RunCalcModel alloc] initWithDistance: rd andSpeed: rs];
         tfDuration.text = [runCalcModel.duration stringValue];
-        [rd release];
     }
     tfPace.text = [rs stringValueForPace];
-    [rs release];
     [self updateRuns];
 }
 
@@ -141,16 +135,13 @@
         RCTimeInterval *rt = [[RCTimeInterval alloc] initWithString:tfDuration.text];
         runCalcModel = [[RunCalcModel alloc] initWithSpeed:rs andDuration:rt];
         tfDistance.text = [runCalcModel.distance stringValue];
-        [rt release];
     }
     else {
         RCDistance *rd = [[RCDistance alloc] initWithString: tfDistance.text];
         runCalcModel = [[RunCalcModel alloc] initWithDistance: rd andSpeed: rs];
         tfDuration.text = [runCalcModel.duration stringValue];
-        [rd release];
     }
     tfSpeed.text = [rs stringValue];
-    [rs release];
     tfDuration.text = [runCalcModel.duration stringValue];
     [self updateRuns];
 }
@@ -163,16 +154,13 @@
         runCalcModel = [[RunCalcModel alloc] initWithDuration:rt andDistance:rd];
         tfSpeed.text = [runCalcModel.speed stringValue];
         tfPace.text = [runCalcModel.speed stringValueForPace];
-        [rt release];
         [self updateRuns];
     }
     else {
         RCSpeed *rs = [[RCSpeed alloc] initWithString: tfSpeed.text];
         runCalcModel = [[RunCalcModel alloc] initWithDistance:rd andSpeed:rs];
         tfDuration.text = [runCalcModel.duration stringValue];
-        [rs release];
     }
-    [rd release];
 }
 
 
@@ -184,16 +172,13 @@
         runCalcModel = [[RunCalcModel alloc] initWithDuration:rt andDistance:rd];
         tfSpeed.text = [runCalcModel.speed stringValue];
         tfPace.text = [runCalcModel.speed stringValueForPace];
-        [rd release];
         [self updateRuns];
     }
     else {
         RCSpeed *rs = [[RCSpeed alloc] initWithString: tfSpeed.text];
         runCalcModel = [[RunCalcModel alloc] initWithSpeed:rs andDuration:rt];
         tfDistance.text = [runCalcModel.distance stringValue];
-        [rs release];
     }
-    [rt release];
 }
 
 							
@@ -216,7 +201,7 @@
 }
 
 - (IBAction)selectUnit:(id)sender  {
-    RCSpeed *s = [runCalcModel.speed retain];
+    RCSpeed *s = runCalcModel.speed;
     switch ([sender selectedSegmentIndex]) {
         case 0: //Km
             self.lblSpeedUnit.text = @"Km/h";
@@ -234,7 +219,7 @@
             self.lblPaceUnit.text = @"mn/Mi";
             self.lblDistanceUnit.text = @"Mi";
             runCalcModel.unit = UNIT_MI;
-            s = [runCalcModel.speed retain];
+            s = runCalcModel.speed;
             if (runCalcModel.distance.status == DISTANCE_VALID)
                 runCalcModel.distance.value = runCalcModel.distance.value / MILE_TO_KM;
             if (s.status == SPEED_VALID) {
@@ -247,7 +232,6 @@
     tfSpeed.text = [runCalcModel.speed stringValue];
     tfPace.text = [runCalcModel.speed stringValueForPace];
     tfDistance.text = [runCalcModel.distance stringValue];
-    [s release];
 }
 	
 - (IBAction)backgroundTouched:(id)sender {
@@ -293,7 +277,6 @@
         tfDuration.enabled = YES;
         tfDuration.backgroundColor = nil;
     }
-    [color release];
 }
 
 - (BOOL)adjustSpeed:(NSString **)aString {

@@ -12,6 +12,6 @@
     NSArray *controllers;
 }
 
-@property (nonatomic, retain) NSArray *controllers;
+@property (nonatomic) NSArray *controllers;
 
 @end

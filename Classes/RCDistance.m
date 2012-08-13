@@ -94,16 +94,16 @@
 
 -(RCDistance *) toMiles {
     if (status == DISTANCE_UNDEF) {
-        return [[[RCDistance alloc] init] autorelease];
+        return [[RCDistance alloc] init];
     }
-    return [[[RCDistance alloc] initWithDistance:self.value / MILE_TO_KM] autorelease];
+    return [[RCDistance alloc] initWithDistance:self.value / MILE_TO_KM];
 }
 
 -(RCDistance *) toKm {
     if (status == DISTANCE_UNDEF) {
-        return [[[RCDistance alloc] init] autorelease];
+        return [[RCDistance alloc] init];
     }
-    return [[[RCDistance alloc] initWithDistance:self.value * MILE_TO_KM] autorelease];
+    return [[RCDistance alloc] initWithDistance:self.value * MILE_TO_KM];
 }
 
 

@@ -60,7 +60,6 @@
 
 -(void)dealloc {
     [self viewDidUnload];
-    [super dealloc];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -111,7 +110,6 @@
         tfKmH.text = [speedKm stringValue];
         tfMnKm.text = [speedKm stringValueForPace];
     }
-    [speed release];
 }
 
 - (IBAction)backgroundTouched:(id)sender {

@@ -19,12 +19,12 @@
     NumericKeyboardView *viNumericKeyboard;
 }
 
-@property (nonatomic, retain) IBOutlet UITextField *tfMaxRate;
-@property (nonatomic, retain) IBOutlet UITextField *tfRestRate;
-@property (nonatomic, retain) IBOutlet UITableView *tvRates;
-@property (nonatomic, retain) IBOutlet UITableViewCell *tcHRate;
-@property (nonatomic, retain) NSArray *rates;
-@property (nonatomic, retain) NumericKeyboardView *viNumericKeyboard;
+@property (nonatomic) IBOutlet UITextField *tfMaxRate;
+@property (nonatomic) IBOutlet UITextField *tfRestRate;
+@property (nonatomic) IBOutlet UITableView *tvRates;
+@property (nonatomic) IBOutlet UITableViewCell *tcHRate;
+@property (nonatomic) NSArray *rates;
+@property (nonatomic) NumericKeyboardView *viNumericKeyboard;
 
 - (IBAction)beginEditing:(id)sender;
 - (IBAction)calcFrequencies:(id)sender;

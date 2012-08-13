@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface NumericKeyboardView : UIView <UIPickerViewDelegate, UIPickerViewDataSource>  {
-    id <UITextInput> delegate;
+    id <UITextInput> __unsafe_unretained delegate;
     int nbDigits;
     int nbFrac;
     bool leadingZeros;
 }
 
-@property (nonatomic, assign) id <UITextInput> delegate;
+@property (nonatomic, unsafe_unretained) id <UITextInput> delegate;
 @property (nonatomic, assign) bool leadingZeros;
 @property (nonatomic, assign) int nbDigits;
 @property (nonatomic, assign) int nbFrac;

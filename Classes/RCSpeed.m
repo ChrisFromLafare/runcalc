@@ -176,17 +176,17 @@
 
 -(RCSpeed *)toKmH {
     if ((status == SPEED_VALID) || (status == SPEED_OUTOFRANGE))
-        return [[[RCSpeed alloc] initWithSpeed:self.value * MILE_TO_KM] autorelease];
+        return [[RCSpeed alloc] initWithSpeed:self.value * MILE_TO_KM];
     else {
-        return [[[RCSpeed alloc] init] autorelease];
+        return [[RCSpeed alloc] init];
     }
 }
 
 -(RCSpeed *)toMileH {
     if ((status == SPEED_VALID) || (status == SPEED_OUTOFRANGE))
-        return [[[RCSpeed alloc] initWithSpeed:self.value / MILE_TO_KM] autorelease];
+        return [[RCSpeed alloc] initWithSpeed:self.value / MILE_TO_KM];
     else {
-        return [[[RCSpeed alloc] init] autorelease];
+        return [[RCSpeed alloc] init];
     }    
 }
 @end

@@ -15,7 +15,7 @@
     UIPickerView *picker;
 }
 
-@property (nonatomic, retain) IBOutlet UIPickerView *picker;
+@property (nonatomic) IBOutlet UIPickerView *picker;
 
 @end
 
@@ -32,11 +32,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    self.picker = nil;
-    [super dealloc];
-}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -85,7 +80,6 @@
                                    [pickerView selectedRowInComponent:5] % 10];
     [delegate replaceRange: textRange
                   withText: replacementString];
-    [replacementString release];
                
 }
 

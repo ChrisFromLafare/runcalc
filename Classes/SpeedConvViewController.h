@@ -19,12 +19,12 @@
     DurationKeyboardView *viDurationKeyboard;
 }
 
-@property (nonatomic, retain) IBOutlet UITextField *tfMnKm;
-@property (nonatomic, retain) IBOutlet UITextField *tfMnMi;
-@property (nonatomic, retain) IBOutlet UITextField *tfKmH;
-@property (nonatomic, retain) IBOutlet UITextField *tfMiH;
-@property (nonatomic, retain) NumericKeyboardView *viNumericKeyboard;
-@property (nonatomic, retain) DurationKeyboardView *viDurationKeyboard;
+@property (nonatomic) IBOutlet UITextField *tfMnKm;
+@property (nonatomic) IBOutlet UITextField *tfMnMi;
+@property (nonatomic) IBOutlet UITextField *tfKmH;
+@property (nonatomic) IBOutlet UITextField *tfMiH;
+@property (nonatomic) NumericKeyboardView *viNumericKeyboard;
+@property (nonatomic) DurationKeyboardView *viDurationKeyboard;
 
 -(IBAction)editingBegin:(id)sender; 
 -(IBAction)convert:(id)sender;

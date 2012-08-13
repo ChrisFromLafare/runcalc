@@ -94,13 +94,6 @@
 }
 
 
-- (void)dealloc {
-    [hRateTableViewController release];
-    [convertTableViewController release];
-    [tabBarController release];
-    [window release];
-    [super dealloc];
-}
 
 @end
 

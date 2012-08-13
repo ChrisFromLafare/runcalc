@@ -16,7 +16,7 @@
     UILabel *lblDecDot;
 }
 
-@property (nonatomic, retain) IBOutlet UIPickerView *picker;
+@property (nonatomic) IBOutlet UIPickerView *picker;
 //@property (nonatomic, retain) IBOutlet UILabel *lblDecDot;
 
 @end
@@ -38,12 +38,6 @@
     leadingZeros = NO;
 }
 
-- (void)dealloc
-{
-    self.picker = nil;
-//    self.lblDecDot = nil;
-    [super dealloc];
-}
 
 #pragma mark -
 #pragma Accessors & Setters
