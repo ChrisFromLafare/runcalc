@@ -115,14 +115,14 @@
 	// Get speed 
     RCSpeed *rs = [[RCSpeed alloc] initWithString: tfSpeed.text];
     if (bDurationLocked.selected) {
-        RCTimeInterval *rt = [[RCTimeInterval alloc] initWithString:tfDuration.text];
-        runCalcModel = [[RunCalcModel alloc] initWithSpeed:rs andDuration:rt];
-        tfDistance.text = [runCalcModel.distance stringValue];
-    }
-    else {
         RCDistance *rd = [[RCDistance alloc] initWithString: tfDistance.text];
         runCalcModel = [[RunCalcModel alloc] initWithDistance: rd andSpeed: rs];
         tfDuration.text = [runCalcModel.duration stringValue];
+    }
+    else {
+        RCTimeInterval *rt = [[RCTimeInterval alloc] initWithString:tfDuration.text];
+        runCalcModel = [[RunCalcModel alloc] initWithSpeed:rs andDuration:rt];
+        tfDistance.text = [runCalcModel.distance stringValue];
     }
     tfPace.text = [rs stringValueForPace];
     [self updateRuns];
@@ -132,14 +132,14 @@
 	// Get speed (as pace)
     RCSpeed *rs = [[RCSpeed alloc] initWithPaceString: tfPace.text];
     if (bDurationLocked.selected) {
-        RCTimeInterval *rt = [[RCTimeInterval alloc] initWithString:tfDuration.text];
-        runCalcModel = [[RunCalcModel alloc] initWithSpeed:rs andDuration:rt];
-        tfDistance.text = [runCalcModel.distance stringValue];
-    }
-    else {
         RCDistance *rd = [[RCDistance alloc] initWithString: tfDistance.text];
         runCalcModel = [[RunCalcModel alloc] initWithDistance: rd andSpeed: rs];
         tfDuration.text = [runCalcModel.duration stringValue];
+    }
+    else {
+        RCTimeInterval *rt = [[RCTimeInterval alloc] initWithString:tfDuration.text];
+        runCalcModel = [[RunCalcModel alloc] initWithSpeed:rs andDuration:rt];
+        tfDistance.text = [runCalcModel.distance stringValue];
     }
     tfSpeed.text = [rs stringValue];
     tfDuration.text = [runCalcModel.duration stringValue];
@@ -150,16 +150,16 @@
 	// Get distance
     RCDistance *rd = [[RCDistance alloc] initWithString:tfDistance.text];
     if (bDurationLocked.selected) {
+        RCSpeed *rs = [[RCSpeed alloc] initWithString: tfSpeed.text];
+        runCalcModel = [[RunCalcModel alloc] initWithDistance:rd andSpeed:rs];
+        tfDuration.text = [runCalcModel.duration stringValue];
+    }
+    else {
         RCTimeInterval *rt = [[RCTimeInterval alloc] initWithString:tfDuration.text];
         runCalcModel = [[RunCalcModel alloc] initWithDuration:rt andDistance:rd];
         tfSpeed.text = [runCalcModel.speed stringValue];
         tfPace.text = [runCalcModel.speed stringValueForPace];
         [self updateRuns];
-    }
-    else {
-        RCSpeed *rs = [[RCSpeed alloc] initWithString: tfSpeed.text];
-        runCalcModel = [[RunCalcModel alloc] initWithDistance:rd andSpeed:rs];
-        tfDuration.text = [runCalcModel.duration stringValue];
     }
 }
 
@@ -168,16 +168,16 @@
 	//Get Duration and speed
     RCTimeInterval *rt = [[RCTimeInterval alloc] initWithString:tfDuration.text];
     if (bDistanceLocked.selected) {
+        RCSpeed *rs = [[RCSpeed alloc] initWithString: tfSpeed.text];
+        runCalcModel = [[RunCalcModel alloc] initWithSpeed:rs andDuration:rt];
+        tfDistance.text = [runCalcModel.distance stringValue];
+    }
+    else {
         RCDistance *rd = [[RCDistance alloc] initWithString:tfDistance  .text];
         runCalcModel = [[RunCalcModel alloc] initWithDuration:rt andDistance:rd];
         tfSpeed.text = [runCalcModel.speed stringValue];
         tfPace.text = [runCalcModel.speed stringValueForPace];
         [self updateRuns];
-    }
-    else {
-        RCSpeed *rs = [[RCSpeed alloc] initWithString: tfSpeed.text];
-        runCalcModel = [[RunCalcModel alloc] initWithSpeed:rs andDuration:rt];
-        tfDistance.text = [runCalcModel.distance stringValue];
     }
 }
 
