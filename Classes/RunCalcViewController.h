@@ -10,6 +10,7 @@
 #import "RunCalcModel.h"
 #import "NumericKeyboardView.h"
 #import "DurationKeyboardView.h"
+#import "KeyBoardAccessoryView.h"
 
 
 @interface RunCalcViewController : UIViewController <UITextFieldDelegate> {
@@ -23,12 +24,19 @@
     UILabel *lblSpeedUnit;
     UILabel *lblPaceUnit;
     UILabel *lblDistanceUnit;
+    UILabel *lblSpeedUnit1;
+    UILabel *lblPaceUnit1;
+    UILabel *lblDistanceUnit1;
     UISegmentedControl *scUnit;
-    UIButton *bSpeedLocked;
-    UIButton *bDistanceLocked;
-    UIButton *bDurationLocked;
+    UIImageView *ivButtonSpeed;
+    UIImageView *ivButtonDistance;
+    UIImageView *ivButtonDuration;
+    UIGestureRecognizer *pgrSpeed;
+    UIGestureRecognizer *pgrDistance;
+    UIGestureRecognizer *pgrDuration;
     NumericKeyboardView *viNumericKeyboard;
     DurationKeyboardView *viDurationKeyboard;
+    KeyboardAccessoryView *viKeyboardAccessory;
 }
 
 @property (nonatomic) RunCalcModel *runCalcModel;
@@ -41,18 +49,25 @@
 @property (nonatomic) IBOutlet UILabel *lblSpeedUnit;
 @property (nonatomic) IBOutlet UILabel *lblPaceUnit;
 @property (nonatomic) IBOutlet UILabel *lblDistanceUnit;
+@property (nonatomic) IBOutlet UILabel *lblSpeedUnit1;
+@property (nonatomic) IBOutlet UILabel *lblPaceUnit1;
+@property (nonatomic) IBOutlet UILabel *lblDistanceUnit1;
 @property (nonatomic) IBOutlet UISegmentedControl *scUnit;
-@property (nonatomic) IBOutlet UIButton *bSpeedLocked;
-@property (nonatomic) IBOutlet UIButton *bDistanceLocked;
-@property (nonatomic) IBOutlet UIButton *bDurationLocked;
-@property (nonatomic) IBOutlet NumericKeyboardView *viNumericKeyboard;
-@property (nonatomic) IBOutlet DurationKeyboardView *viDurationKeyboard;
+@property (nonatomic) IBOutlet UIImageView *ivButtonSpeed;
+@property (nonatomic) IBOutlet UIImageView *ivButtonDistance;
+@property (nonatomic) IBOutlet UIImageView *ivButtonDuration;
+@property (nonatomic) IBOutlet UIGestureRecognizer *pgrSpeed;
+@property (nonatomic) IBOutlet UIGestureRecognizer *pgrDistance;
+@property (nonatomic) IBOutlet UIGestureRecognizer *pgrDuration;
+@property (nonatomic) NumericKeyboardView *viNumericKeyboard;
+@property (nonatomic) DurationKeyboardView *viDurationKeyboard;
+@property (nonatomic) KeyboardAccessoryView *viKeyboardAccessory;
 
 - (IBAction)convert: (id) sender;
 - (IBAction)selectUnit:(id)sender;
 - (IBAction)backgroundTouched:(id)sender;
 - (IBAction)beginEdit:(id)sender;
 - (IBAction)endEdit:(id)sender;
-- (IBAction)lockVariable:(id)sender;
+- (IBAction)handlePan:(UIPanGestureRecognizer *)recognizer;
 
 @end

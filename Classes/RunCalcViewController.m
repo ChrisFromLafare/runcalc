@@ -10,6 +10,7 @@
 #import "RunCalcModel.h"
 
 #import "math.h"
+#define BUTTON_SHADOW_LENGTH 178 // LONGUEUR de l'ombre dégradée a gauche et a droite du bouton
 
 @implementation RunCalcViewController
 
@@ -17,9 +18,12 @@
 @synthesize tfSpeed, tfDistance, tfDuration, tfPace;
 @synthesize scUnit;
 @synthesize lblHalfMarathon, lblMarathon, lblDistanceUnit, lblPaceUnit, lblSpeedUnit;
-@synthesize viDurationKeyboard, viNumericKeyboard;
-@synthesize bSpeedLocked, bDistanceLocked, bDurationLocked;
+@synthesize lblDistanceUnit1, lblPaceUnit1, lblSpeedUnit1;
+@synthesize viDurationKeyboard, viNumericKeyboard, viKeyboardAccessory;
+@synthesize ivButtonSpeed, ivButtonDistance, ivButtonDuration;
+@synthesize pgrSpeed, pgrDistance, pgrDuration;
 
+enum RCParameter {SPEED=1, DURATION=2, DISTANCE=3} calcVar;
 
 
 
@@ -43,6 +47,13 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Create Background  
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"RunCalc-Bg1.png"]];
+    // Load images for buttons
+    self.ivButtonDistance.image = [UIImage imageNamed:@"RunCalc-ButtonWithShadows.png"];
+    self.ivButtonSpeed.image =   [UIImage imageNamed:@"RunCalc-ButtonWithShadows-2.png"];
+    self.ivButtonDuration.image = [UIImage imageNamed:@"RunCalc-ButtonWithShadows.png"];
+    // Init Model
     RCSpeed *rs = [[RCSpeed alloc] initWithSpeed: 0];
     RCDistance *rd = [[RCDistance alloc] initWithDistance:1.0];
     runCalcModel = [[RunCalcModel alloc] initWithDistance:rd andSpeed:rs];
@@ -63,7 +74,13 @@
     self.viDurationKeyboard = (DurationKeyboardView *)[views objectAtIndex:0];
     self.tfDuration.inputView = viDurationKeyboard;
     self.tfPace.inputView = viDurationKeyboard;
-    [self lockVariable:bDistanceLocked];
+    views = [[NSBundle mainBundle] loadNibNamed:@"KeyboardAccessoryView" owner:self options:nil];
+    self.viKeyboardAccessory = (KeyboardAccessoryView *)[views objectAtIndex:0];
+    self.tfPace.inputAccessoryView = viKeyboardAccessory;
+    self.tfDuration.inputAccessoryView = viKeyboardAccessory;
+    self.tfDistance.inputAccessoryView = viKeyboardAccessory;
+    self.tfSpeed.inputAccessoryView = viKeyboardAccessory;
+    [self lockVariable: DISTANCE];
 }
 
 
@@ -96,9 +113,9 @@
     self.lblDistanceUnit = nil;
     self.lblPaceUnit = nil;
     self.lblSpeedUnit = nil;
-    self.bDistanceLocked = nil;
-    self.bDurationLocked = nil;
-    self.bSpeedLocked = nil;
+    self.lblDistanceUnit1 = nil;
+    self.lblPaceUnit1 = nil;
+    self.lblSpeedUnit1 = nil;
 }
 
 
@@ -114,7 +131,7 @@
 - (void) speedChanged {	
 	// Get speed 
     RCSpeed *rs = [[RCSpeed alloc] initWithString: tfSpeed.text];
-    if (bDurationLocked.selected) {
+    if (calcVar == DURATION) {
         RCDistance *rd = [[RCDistance alloc] initWithString: tfDistance.text];
         runCalcModel = [[RunCalcModel alloc] initWithDistance: rd andSpeed: rs];
         tfDuration.text = [runCalcModel.duration stringValue];
@@ -131,7 +148,7 @@
 - (void) paceChanged {	
 	// Get speed (as pace)
     RCSpeed *rs = [[RCSpeed alloc] initWithPaceString: tfPace.text];
-    if (bDurationLocked.selected) {
+    if (calcVar) {
         RCDistance *rd = [[RCDistance alloc] initWithString: tfDistance.text];
         runCalcModel = [[RunCalcModel alloc] initWithDistance: rd andSpeed: rs];
         tfDuration.text = [runCalcModel.duration stringValue];
@@ -149,7 +166,7 @@
 - (void) distanceChanged {
 	// Get distance
     RCDistance *rd = [[RCDistance alloc] initWithString:tfDistance.text];
-    if (bDurationLocked.selected) {
+    if (calcVar == DURATION) {
         RCSpeed *rs = [[RCSpeed alloc] initWithString: tfSpeed.text];
         runCalcModel = [[RunCalcModel alloc] initWithDistance:rd andSpeed:rs];
         tfDuration.text = [runCalcModel.duration stringValue];
@@ -167,7 +184,7 @@
 - (void) durationChanged {
 	//Get Duration and speed
     RCTimeInterval *rt = [[RCTimeInterval alloc] initWithString:tfDuration.text];
-    if (bDistanceLocked.selected) {
+    if (calcVar == DISTANCE) {
         RCSpeed *rs = [[RCSpeed alloc] initWithString: tfSpeed.text];
         runCalcModel = [[RunCalcModel alloc] initWithSpeed:rs andDuration:rt];
         tfDistance.text = [runCalcModel.distance stringValue];
@@ -207,6 +224,9 @@
             self.lblSpeedUnit.text = @"Km/h";
             self.lblPaceUnit.text = @"mn/Km";
             self.lblDistanceUnit.text = @"Km";
+            self.lblSpeedUnit1.text = @"Km/h";
+            self.lblPaceUnit1.text = @"mn/Km";
+            self.lblDistanceUnit1.text = @"Km";
             runCalcModel.unit = UNIT_KM;
             if (runCalcModel.distance.status == DISTANCE_VALID)
                 runCalcModel.distance.value = runCalcModel.distance.value * MILE_TO_KM;
@@ -218,6 +238,9 @@
             self.lblSpeedUnit.text = @"Mi/h";
             self.lblPaceUnit.text = @"mn/Mi";
             self.lblDistanceUnit.text = @"Mi";
+            self.lblSpeedUnit1.text = @"Mi/h";
+            self.lblPaceUnit1.text = @"mn/Mi";
+            self.lblDistanceUnit1.text = @"Mi";
             runCalcModel.unit = UNIT_MI;
             s = runCalcModel.speed;
             if (runCalcModel.distance.status == DISTANCE_VALID)
@@ -241,41 +264,95 @@
     [tfSpeed resignFirstResponder];
 }
 
-- (IBAction)lockVariable:(id)sender {
-    UIColor *color = [[UIColor alloc] initWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
-    if (sender == bSpeedLocked) {
-        bSpeedLocked.selected = YES;
+-(IBAction)handlePan:(UIPanGestureRecognizer *)recognizer {
+    __block CGPoint translation, translation1;
+    enum RCParameter oldCalcVar = calcVar;
+    if (recognizer.state == UIGestureRecognizerStateEnded) { 
+        if (recognizer.view.center.x > 160) {
+            translation = CGPointMake(320 - (recognizer.view.frame.size.width/2 - BUTTON_SHADOW_LENGTH) - 20,
+                                      recognizer.view.center.y);
+            translation1 = CGPointMake(20 + [self.view viewWithTag:calcVar].frame.size.width/2 - BUTTON_SHADOW_LENGTH, 
+                                      [self.view viewWithTag:calcVar].center.y);
+            // the tag in view equal 1 for speed, 2 for duration, 3 for distance according to ENUM RCParameter
+            [self lockVariable: recognizer.view.tag];
+        }
+        else {
+            translation = CGPointMake(20 + recognizer.view.frame.size.width/2 - BUTTON_SHADOW_LENGTH, 
+                                      recognizer.view.center.y);
+            translation1 = CGPointMake(320 - ([self.view viewWithTag:calcVar].frame.size.width/2 - BUTTON_SHADOW_LENGTH) - 20,
+                                      [self.view viewWithTag:calcVar].center.y);
+        } 
+        [UIView animateWithDuration:0.2 delay:0 
+                    options:UIViewAnimationOptionCurveEaseOut 
+                    animations:^{
+                        recognizer.view.center = translation;
+                        [self.view viewWithTag:oldCalcVar].center = translation1;
+                    } 
+                    completion:nil];
+    }
+    else {
+        CGPoint min = CGPointMake(20 + recognizer.view.frame.size.width/2 - BUTTON_SHADOW_LENGTH, 
+                                  recognizer.view.center.y);
+        CGPoint max = CGPointMake(320 - (recognizer.view.frame.size.width/2 - BUTTON_SHADOW_LENGTH) - 20,
+                                  recognizer.view.center.y);
+        translation = recognizer.view.center;
+        translation.x += [recognizer translationInView:self.view].x;
+        if (translation.x > max.x)
+            translation.x = max.x;
+        else if (translation.x < min.x)
+            translation.x = min.x;
+        recognizer.view.center = translation;
+        translation = [self.view viewWithTag:calcVar].center;
+        translation.x -= [recognizer translationInView:self.view].x;
+        if (translation.x > max.x)
+            translation.x = max.x;
+        else if (translation.x < min.x)
+            translation.x = min.x;
+        [self.view viewWithTag:calcVar].center = translation;
+        [recognizer setTranslation:CGPointMake(0, 0) inView:self.view];
+    }
+}
+
+- (void) lockVariable:(enum RCParameter)sender {
+//    UIColor *color = [[UIColor alloc] initWithRed:0.9 green:0.9 blue:0.9 alpha:0.0];
+    if (sender == SPEED) {
+        calcVar = SPEED;
         tfSpeed.enabled = NO;
         tfPace.enabled = NO;
-        tfSpeed.backgroundColor = color;
-        tfPace.backgroundColor = color;
+        pgrSpeed.enabled = NO;
+        
+//        tfSpeed.backgroundColor = color;
+//        tfPace.backgroundColor = color;
     }
     else {
-        bSpeedLocked.selected = NO;
+//        bSpeedLocked.selected = NO;
         tfSpeed.enabled = YES;
         tfPace.enabled = YES;
-        tfSpeed.backgroundColor = nil;
-        tfPace.backgroundColor = nil;
+        pgrSpeed.enabled = YES;
+//        tfSpeed.backgroundColor = nil;
+//        tfPace.backgroundColor = nil;
     }    
-    if (sender == bDistanceLocked) {
-        bDistanceLocked.selected = YES;
+    if (sender == DISTANCE) {
+        calcVar = DISTANCE;
         tfDistance.enabled = NO;
-        tfDistance.backgroundColor = color;
+        pgrDistance.enabled = NO;
+//        tfDistance.backgroundColor = color;
     }
     else {
-        bDistanceLocked.selected = NO;
         tfDistance.enabled = YES;
-        tfDistance.backgroundColor = nil;
+        pgrDistance.enabled = YES;
+//        tfDistance.backgroundColor = nil;
     }
-    if (sender == bDurationLocked) {
-        bDurationLocked.selected = YES;
+    if (sender == DURATION) {
+        calcVar = DURATION;
         tfDuration.enabled = NO;
-        tfDuration.backgroundColor = color;
+        pgrDuration.enabled = NO;
+//        tfDuration.backgroundColor = color;
     }
     else {
-        bDurationLocked.selected = NO;
         tfDuration.enabled = YES;
-        tfDuration.backgroundColor = nil;
+        pgrDuration.enabled = YES;
+//        tfDuration.backgroundColor = nil;
     }
 }
 
@@ -309,110 +386,114 @@
 	return NO;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {					
-	NSString *resultingString;
-	if (textField == tfSpeed) {
-        // DEL
-        if ((string.length == 0) && (range.location == textField.text.length - 1)) {
-            if (([textField.text characterAtIndex:0] != '#') && ([textField.text characterAtIndex:0] != '-')) {
-                resultingString = [NSString stringWithFormat:@"0%c%c%c%c", 
-                               [textField.text characterAtIndex:0],
-                               [textField.text characterAtIndex:2],
-                               [textField.text characterAtIndex:1],
-                               [textField.text characterAtIndex:3]];
-                textField.text = resultingString;
-            }
-            
-       }
-		// the input text must be 1 character long and at the end of the string
-		if ((string.length == 1) && (range.location == textField.text.length)) { 
-            if (([textField.text characterAtIndex:0] != '#') && ([textField.text characterAtIndex:0] != '-')) {
-                resultingString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-                if ([self adjustSpeed:&resultingString]) {
-                    textField.text = resultingString;
-                }
-            }
-            else {
-                textField.text = [NSString localizedStringWithFormat:@"%05.2f", [string floatValue]/100];
-            }
-		}
-		return NO;
-	}
-	if (textField == tfDistance) {
-        // DEL
-        if ((string.length == 0) && (range.location == textField.text.length - 1)) {
-            if (([textField.text characterAtIndex:0] != '#') && ([textField.text characterAtIndex:0] != '-')) {
-                resultingString = [NSString stringWithFormat:@"0%c%c%c%c%c", 
-                                   [textField.text characterAtIndex:0],
-                                   [textField.text characterAtIndex:1],
-                                   [textField.text characterAtIndex:3],
-                                   [textField.text characterAtIndex:2],
-                                   [textField.text characterAtIndex:4]];
-                textField.text = resultingString;
-            }
-            
-        }
-		// the input text must be 1 character long and at the end of the string
-		if ((string.length == 1) && (range.location == textField.text.length)) { 
-            if (([textField.text characterAtIndex:0] != '#') && ([textField.text characterAtIndex:0] != '-')) {
-                resultingString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-                if ([self adjustDistance:&resultingString]) {
-                    textField.text = resultingString;
-                }
-            }
-            else {
-                textField.text = [NSString localizedStringWithFormat:@"%06.2f", [string floatValue]/100];
-            }
-		}
-		return NO;
-	}
-    if ((textField == tfDuration) || (textField == tfPace)) {
-        //DEL
-        if ((string.length == 0) && (range.location == textField.text.length - 1)) {
-            if (([textField.text characterAtIndex:0] != '#') && ([textField.text characterAtIndex:0] != '-')) {
-                resultingString = [NSString stringWithFormat:@"0%c:%c%c:%c%c",
-                               [textField.text characterAtIndex:0],
-                               [textField.text characterAtIndex:1],
-                               [textField.text characterAtIndex:3],
-                               [textField.text characterAtIndex:4],
-                               [textField.text characterAtIndex:6]];
-                textField.text = resultingString;
-            }
-        }
-		// the input text must be 1 character long and at the end of the string
-		if ((string.length == 1) && (range.location == textField.text.length)) { 
-            if (([textField.text characterAtIndex:0] != '#') && ([textField.text characterAtIndex:0] != '-')) {
-                resultingString = [NSString stringWithFormat:@"%c%c:%c%c:%c%c",
-                               [textField.text characterAtIndex:1],
-                               [textField.text characterAtIndex:3],
-                               [textField.text characterAtIndex:4],
-                               [textField.text characterAtIndex:6],
-                               [textField.text characterAtIndex:7],
-                               [string characterAtIndex:0]];
-                textField.text = resultingString;
-            }
-            else {
-                textField.text = [NSString stringWithFormat:@"00:00:0%c",
-                                  [string characterAtIndex:0]];
-            }
-        }
-        return NO;
-    }
-	return YES;
-}
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {					
+//	NSString *resultingString;
+//	if (textField == tfSpeed) {
+//        // DEL
+//        if ((string.length == 0) && (range.location == textField.text.length - 1)) {
+//            if (([textField.text characterAtIndex:0] != '#') && ([textField.text characterAtIndex:0] != '-')) {
+//                resultingString = [NSString stringWithFormat:@"0%c%c%c%c", 
+//                               [textField.text characterAtIndex:0],
+//                               [textField.text characterAtIndex:2],
+//                               [textField.text characterAtIndex:1],
+//                               [textField.text characterAtIndex:3]];
+//                textField.text = resultingString;
+//            }
+//            
+//       }
+//		// the input text must be 1 character long and at the end of the string
+//		if ((string.length == 1) && (range.location == textField.text.length)) { 
+//            if (([textField.text characterAtIndex:0] != '#') && ([textField.text characterAtIndex:0] != '-')) {
+//                resultingString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+//                if ([self adjustSpeed:&resultingString]) {
+//                    textField.text = resultingString;
+//                }
+//            }
+//            else {
+//                textField.text = [NSString localizedStringWithFormat:@"%05.2f", [string floatValue]/100];
+//            }
+//		}
+//		return NO;
+//	}
+//	if (textField == tfDistance) {
+//        // DEL
+//        if ((string.length == 0) && (range.location == textField.text.length - 1)) {
+//            if (([textField.text characterAtIndex:0] != '#') && ([textField.text characterAtIndex:0] != '-')) {
+//                resultingString = [NSString stringWithFormat:@"0%c%c%c%c%c", 
+//                                   [textField.text characterAtIndex:0],
+//                                   [textField.text characterAtIndex:1],
+//                                   [textField.text characterAtIndex:3],
+//                                   [textField.text characterAtIndex:2],
+//                                   [textField.text characterAtIndex:4]];
+//                textField.text = resultingString;
+//            }
+//            
+//        }
+//		// the input text must be 1 character long and at the end of the string
+//		if ((string.length == 1) && (range.location == textField.text.length)) { 
+//            if (([textField.text characterAtIndex:0] != '#') && ([textField.text characterAtIndex:0] != '-')) {
+//                resultingString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+//                if ([self adjustDistance:&resultingString]) {
+//                    textField.text = resultingString;
+//                }
+//            }
+//            else {
+//                textField.text = [NSString localizedStringWithFormat:@"%06.2f", [string floatValue]/100];
+//            }
+//		}
+//		return NO;
+//	}
+//    if ((textField == tfDuration) || (textField == tfPace)) {
+//        //DEL
+//        if ((string.length == 0) && (range.location == textField.text.length - 1)) {
+//            if (([textField.text characterAtIndex:0] != '#') && ([textField.text characterAtIndex:0] != '-')) {
+//                resultingString = [NSString stringWithFormat:@"0%c:%c%c:%c%c",
+//                               [textField.text characterAtIndex:0],
+//                               [textField.text characterAtIndex:1],
+//                               [textField.text characterAtIndex:3],
+//                               [textField.text characterAtIndex:4],
+//                               [textField.text characterAtIndex:6]];
+//                textField.text = resultingString;
+//            }
+//        }
+//		// the input text must be 1 character long and at the end of the string
+//		if ((string.length == 1) && (range.location == textField.text.length)) { 
+//            if (([textField.text characterAtIndex:0] != '#') && ([textField.text characterAtIndex:0] != '-')) {
+//                resultingString = [NSString stringWithFormat:@"%c%c:%c%c:%c%c",
+//                               [textField.text characterAtIndex:1],
+//                               [textField.text characterAtIndex:3],
+//                               [textField.text characterAtIndex:4],
+//                               [textField.text characterAtIndex:6],
+//                               [textField.text characterAtIndex:7],
+//                               [string characterAtIndex:0]];
+//                textField.text = resultingString;
+//            }
+//            else {
+//                textField.text = [NSString stringWithFormat:@"00:00:0%c",
+//                                  [string characterAtIndex:0]];
+//            }
+//        }
+//        return NO;
+//    }
+//	return YES;
+//}
 
-- (BOOL)textFieldShouldClear:(UITextField *)textField {
-	if (textField == tfSpeed) {
-		textField.text = [NSString localizedStringWithFormat:@"%05.2f", @"0"];
-	}
-    else if (textField == tfDistance) {
-		textField.text = [NSString localizedStringWithFormat:@"%06.2f", @"0"];
-    }
-    else {
-        textField.text = @"00:00:00";
-    }
-	return NO;
-}
+//- (BOOL)textFieldShouldClear:(UITextField *)textField {
+//	if (textField == tfSpeed) {
+//		textField.text = [NSString localizedStringWithFormat:@"%05.2f", @"0"];
+//	}
+//    else if (textField == tfDistance) {
+//		textField.text = [NSString localizedStringWithFormat:@"%06.2f", @"0"];
+//    }
+//    else {
+//        textField.text = @"00:00:00";
+//    }
+//	return NO;
+//}
+
+//- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+//    return NO;
+//}
 
 - (void)beginEdit:(id)sender {
 //    UIColor *color = [[UIColor alloc] initWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];
@@ -446,6 +527,7 @@
         [viDurationKeyboard setKeyboardValue:((UITextField *)sender).text];
     }
 //    [color release];
+    viKeyboardAccessory.activeControl = sender;
 }
 
 - (void)endEdit:(id)sender {
