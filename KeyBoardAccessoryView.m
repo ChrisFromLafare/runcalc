@@ -23,6 +23,10 @@
     return self;
 }
 
+- (void)awakeFromNib {
+    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"RunCalc-BgAccessory.png"]];
+}
+
 
 /*
 // Only override drawRect: if you perform custom drawing.
