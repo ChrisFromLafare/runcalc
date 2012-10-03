@@ -13,8 +13,9 @@
 #import "KeyBoardAccessoryView.h"
 
 
-@interface RunCalcViewController : UIViewController <UITextFieldDelegate> {
+@interface RunCalcViewController : UIViewController <UITextFieldDelegate, UIGestureRecognizerDelegate> {
     RunCalcModel *runCalcModel;
+    UIScrollView *srollView;
 	UITextField *tfSpeed;
 	UITextField *tfDistance;
 	UITextField *tfDuration;
@@ -40,6 +41,7 @@
 }
 
 @property (nonatomic) RunCalcModel *runCalcModel;
+@property (nonatomic) IBOutlet UIScrollView *scrollView;
 @property (nonatomic) IBOutlet UITextField *tfSpeed;
 @property (nonatomic) IBOutlet UITextField *tfDistance;
 @property (nonatomic) IBOutlet UITextField *tfDuration;
@@ -67,7 +69,6 @@
 - (IBAction)selectUnit:(id)sender;
 - (IBAction)backgroundTouched:(id)sender;
 - (IBAction)beginEdit:(id)sender;
-- (IBAction)endEdit:(id)sender;
 - (IBAction)handlePan:(UIPanGestureRecognizer *)recognizer;
 
 @end

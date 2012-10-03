@@ -43,6 +43,10 @@
 		45F918C0156A91D4001752F7 /* HRateCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45F918BF156A91D4001752F7 /* HRateCellView.xib */; };
 		45F918CA156BEEB6001752F7 /* PerCentKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45F918C9156BEEB6001752F7 /* PerCentKeyboardView.xib */; };
 		45F91906156BEF38001752F7 /* PerCentKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F91904156BEF38001752F7 /* PerCentKeyboardView.m */; };
+		AA1C8346161B45D000F4F0DA /* RunCalc-BgAccessory.png in Resources */ = {isa = PBXBuildFile; fileRef = AA1C8342161B45D000F4F0DA /* RunCalc-BgAccessory.png */; };
+		AA1C8347161B45D000F4F0DA /* RunCalc-BgAccessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA1C8343161B45D000F4F0DA /* RunCalc-BgAccessory@2x.png */; };
+		AA1C8348161B45D000F4F0DA /* RunCalc-ButtonAccessory.png in Resources */ = {isa = PBXBuildFile; fileRef = AA1C8344161B45D000F4F0DA /* RunCalc-ButtonAccessory.png */; };
+		AA1C8349161B45D000F4F0DA /* RunCalc-ButtonAccessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA1C8345161B45D000F4F0DA /* RunCalc-ButtonAccessory@2x.png */; };
 		AA94809115ADA1C00067B36B /* RunCalcViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA94809015ADA1C00067B36B /* RunCalcViewController.xib */; };
 		AAFE0D4B16105685004B2814 /* KeyboardAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFE0D4916105685004B2814 /* KeyboardAccessoryView.m */; };
 		AAFE0D4C16105685004B2814 /* KeyboardAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAFE0D4A16105685004B2814 /* KeyboardAccessoryView.xib */; };
@@ -124,6 +128,10 @@
 		45F91904156BEF38001752F7 /* PerCentKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PerCentKeyboardView.m; path = Classes/PerCentKeyboardView.m; sourceTree = "<group>"; };
 		45F91905156BEF38001752F7 /* PerCentKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PerCentKeyboardView.h; path = Classes/PerCentKeyboardView.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* RunCalc-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RunCalc-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		AA1C8342161B45D000F4F0DA /* RunCalc-BgAccessory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-BgAccessory.png"; sourceTree = "<group>"; };
+		AA1C8343161B45D000F4F0DA /* RunCalc-BgAccessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-BgAccessory@2x.png"; sourceTree = "<group>"; };
+		AA1C8344161B45D000F4F0DA /* RunCalc-ButtonAccessory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-ButtonAccessory.png"; sourceTree = "<group>"; };
+		AA1C8345161B45D000F4F0DA /* RunCalc-ButtonAccessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-ButtonAccessory@2x.png"; sourceTree = "<group>"; };
 		AA94809015ADA1C00067B36B /* RunCalcViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RunCalcViewController.xib; sourceTree = "<group>"; };
 		AAFE0D4816105685004B2814 /* KeyboardAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardAccessoryView.h; sourceTree = "<group>"; };
 		AAFE0D4916105685004B2814 /* KeyboardAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardAccessoryView.m; sourceTree = "<group>"; };
@@ -341,6 +349,10 @@
 		AAFF5E7C15FE39690078BE91 /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
+				AA1C8342161B45D000F4F0DA /* RunCalc-BgAccessory.png */,
+				AA1C8343161B45D000F4F0DA /* RunCalc-BgAccessory@2x.png */,
+				AA1C8344161B45D000F4F0DA /* RunCalc-ButtonAccessory.png */,
+				AA1C8345161B45D000F4F0DA /* RunCalc-ButtonAccessory@2x.png */,
 				AAFF5E7D15FE39690078BE91 /* coeurJaune.png */,
 				AAFF5E7E15FE39690078BE91 /* coeurRouge.png */,
 				AAFF5E7F15FE39690078BE91 /* coeurVert.png */,
@@ -469,6 +481,10 @@
 				AAFF5EA115FE39690078BE91 /* RunCalc-Fenetre.png in Resources */,
 				AAFF5EA215FE39690078BE91 /* RunCalc-Fenetre@2x.png in Resources */,
 				AAFE0D4C16105685004B2814 /* KeyboardAccessoryView.xib in Resources */,
+				AA1C8346161B45D000F4F0DA /* RunCalc-BgAccessory.png in Resources */,
+				AA1C8347161B45D000F4F0DA /* RunCalc-BgAccessory@2x.png in Resources */,
+				AA1C8348161B45D000F4F0DA /* RunCalc-ButtonAccessory.png in Resources */,
+				AA1C8349161B45D000F4F0DA /* RunCalc-ButtonAccessory@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

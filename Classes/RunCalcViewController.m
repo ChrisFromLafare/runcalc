@@ -12,9 +12,14 @@
 #import "math.h"
 #define BUTTON_SHADOW_LENGTH 178 // LONGUEUR de l'ombre dégradée a gauche et a droite du bouton
 
+@interface RunCalcViewController() 
+@property (nonatomic) UIControl *activeControl;
+@end
+
 @implementation RunCalcViewController
 
 @synthesize runCalcModel;
+@synthesize scrollView;
 @synthesize tfSpeed, tfDistance, tfDuration, tfPace;
 @synthesize scUnit;
 @synthesize lblHalfMarathon, lblMarathon, lblDistanceUnit, lblPaceUnit, lblSpeedUnit;
@@ -22,10 +27,14 @@
 @synthesize viDurationKeyboard, viNumericKeyboard, viKeyboardAccessory;
 @synthesize ivButtonSpeed, ivButtonDistance, ivButtonDuration;
 @synthesize pgrSpeed, pgrDistance, pgrDuration;
+@synthesize activeControl; // Contain the active control, used the define if scrolling is required
+                            // to have the active control visible (not hidden by the keyboard)
 
 enum RCParameter {SPEED=1, DURATION=2, DISTANCE=3} calcVar;
 
 
+
+#pragma mark - View Management
 
 // The designated initializer. Override to perform setup that is required before the view is loaded.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -43,7 +52,6 @@ enum RCParameter {SPEED=1, DURATION=2, DISTANCE=3} calcVar;
 }
 */
 
-
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -53,6 +61,8 @@ enum RCParameter {SPEED=1, DURATION=2, DISTANCE=3} calcVar;
     self.ivButtonDistance.image = [UIImage imageNamed:@"RunCalc-ButtonWithShadows.png"];
     self.ivButtonSpeed.image =   [UIImage imageNamed:@"RunCalc-ButtonWithShadows-2.png"];
     self.ivButtonDuration.image = [UIImage imageNamed:@"RunCalc-ButtonWithShadows.png"];
+    // Init scrollview
+    self.scrollView.contentSize = self.scrollView.frame.size;
     // Init Model
     RCSpeed *rs = [[RCSpeed alloc] initWithSpeed: 0];
     RCDistance *rd = [[RCDistance alloc] initWithDistance:1.0];
@@ -62,7 +72,7 @@ enum RCParameter {SPEED=1, DURATION=2, DISTANCE=3} calcVar;
     tfDistance.text = [runCalcModel.distance stringValue];
     tfDuration.text = [runCalcModel.duration stringValue];
     tfPace.text = [runCalcModel.speed stringValueForPace];
-    // Charger les claviers
+    // load specific keyboards & accessory 
     NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"NumericKeyboardView" owner:self options:nil];
     self.viNumericKeyboard = (NumericKeyboardView *)[views objectAtIndex:0];
     viNumericKeyboard.leadingZeros = YES;
@@ -80,6 +90,7 @@ enum RCParameter {SPEED=1, DURATION=2, DISTANCE=3} calcVar;
     self.tfDuration.inputAccessoryView = viKeyboardAccessory;
     self.tfDistance.inputAccessoryView = viKeyboardAccessory;
     self.tfSpeed.inputAccessoryView = viKeyboardAccessory;
+    // lock the distance
     [self lockVariable: DISTANCE];
 }
 
@@ -123,6 +134,51 @@ enum RCParameter {SPEED=1, DURATION=2, DISTANCE=3} calcVar;
     [self viewDidUnload];
 }
 
+-(void) viewDidAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter  defaultCenter]addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillDisappear:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+-(void) viewDidDisappeared:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter  defaultCenter]removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+#pragma mark - Keyboard management
+- (void) keyboardWasShown: (NSNotification *)aNotification {
+    // Get the keyboard height
+    // ISC: in Screen Coordinate, IWC in Window coordinate, IVC in View coordinate
+    CGRect keyboardEndFrameISC;
+    [[aNotification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardEndFrameISC];
+    CGRect keyboardEndFrameIWC = [self.scrollView.window convertRect:keyboardEndFrameISC fromWindow:nil];
+    CGRect keyboardEndFrameIVC = [self.view convertRect:keyboardEndFrameIWC fromView:nil];
+    // Compute the height covered by the keyboard (difference between the bottom of the view and the top of the keyboard
+    CGFloat heightCoveredByKeyboard = self.view.frame.size.height - keyboardEndFrameIVC.origin.y;    
+    // Set the scrollview insets accordingly
+    UIEdgeInsets insets = UIEdgeInsetsMake(0, 0, heightCoveredByKeyboard, 0);
+    self.scrollView.contentInset = insets;
+    self.scrollView.scrollIndicatorInsets = insets;
+    // Get the activeControl's bottom left corner coordinates 
+    CGRect activeControlFrameIVC = [self.view convertRect:activeControl.frame fromView:activeControl.superview];
+    CGPoint baseControl = activeControlFrameIVC.origin;
+    baseControl.y += activeControlFrameIVC.size.height;
+    // if the activeControl's bottom corner is hidden by the keyboard scroll up to make it visible
+    if (CGRectContainsPoint(keyboardEndFrameIVC, baseControl)) {
+        CGPoint scrollPoint = CGPointMake(0.0, baseControl.y - keyboardEndFrameIVC.origin.y);
+        [scrollView setContentOffset:scrollPoint animated:YES];
+    }
+}
+
+// Reset the scrollview insets
+-(void) keyboardWillDisappear: (NSNotification *)aNotification {
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    scrollView.contentInset = contentInsets;
+    scrollView.scrollIndicatorInsets = contentInsets;    
+}
+
+#pragma mark - UIComponents update
 - (void) updateRuns {
     lblMarathon.text = [runCalcModel getMarathonDuration].stringValue;
     lblHalfMarathon.text = [runCalcModel getHalfMarathonDuration].stringValue;
@@ -198,7 +254,8 @@ enum RCParameter {SPEED=1, DURATION=2, DISTANCE=3} calcVar;
     }
 }
 
-							
+
+#pragma mark - IBAction methods
 - (IBAction) convert: (id)sender {
 	if (sender == tfSpeed) {
 		[self speedChanged];
@@ -313,234 +370,75 @@ enum RCParameter {SPEED=1, DURATION=2, DISTANCE=3} calcVar;
     }
 }
 
+- (IBAction)beginEdit:(id)sender {
+    activeControl = sender;
+    if (sender == tfDistance) {
+        viNumericKeyboard.nbDigits = 3;
+        viNumericKeyboard.delegate = sender;
+        [viNumericKeyboard setKeyboardValue:((UITextField *)sender).text];
+    }
+    else if (sender == tfDuration) {
+        viDurationKeyboard.delegate = sender;
+        [viDurationKeyboard setKeyboardValue:((UITextField *)sender).text];
+    }
+    else if (sender == tfSpeed) {
+            viNumericKeyboard.nbDigits = 2;
+        viNumericKeyboard.delegate = sender;
+        [viNumericKeyboard setKeyboardValue:((UITextField *)sender).text];
+    }
+    else { // tfPace
+        viDurationKeyboard.delegate = sender;
+        [viDurationKeyboard setKeyboardValue:((UITextField *)sender).text];
+    }
+    viKeyboardAccessory.activeControl = sender;
+}
+
+#pragma mark - Gesture recognizer delegate implementation
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+
+#pragma mark - Helper functions
 - (void) lockVariable:(enum RCParameter)sender {
-//    UIColor *color = [[UIColor alloc] initWithRed:0.9 green:0.9 blue:0.9 alpha:0.0];
+    UIColor *colorOrange = [[UIColor alloc] initWithRed:238.0/255.0 green:177.0/255.0 blue:56.0/255.0 alpha:1.0];
+    UIColor *colorGreen = [[UIColor alloc] initWithRed:94.0/255.0 green:217.0/255.0 blue:78.0/255.0 alpha:1.0];
     if (sender == SPEED) {
         calcVar = SPEED;
         tfSpeed.enabled = NO;
         tfPace.enabled = NO;
         pgrSpeed.enabled = NO;
-        
-//        tfSpeed.backgroundColor = color;
-//        tfPace.backgroundColor = color;
+        tfSpeed.textColor = colorOrange;
+        tfPace.textColor = colorOrange;
     }
     else {
-//        bSpeedLocked.selected = NO;
         tfSpeed.enabled = YES;
         tfPace.enabled = YES;
         pgrSpeed.enabled = YES;
-//        tfSpeed.backgroundColor = nil;
-//        tfPace.backgroundColor = nil;
+        tfSpeed.textColor = colorGreen;
+        tfPace.textColor = colorGreen;
     }    
     if (sender == DISTANCE) {
         calcVar = DISTANCE;
         tfDistance.enabled = NO;
         pgrDistance.enabled = NO;
-//        tfDistance.backgroundColor = color;
+        tfDistance.textColor = colorOrange;
     }
     else {
         tfDistance.enabled = YES;
         pgrDistance.enabled = YES;
-//        tfDistance.backgroundColor = nil;
+        tfDistance.textColor = colorGreen;
     }
     if (sender == DURATION) {
         calcVar = DURATION;
         tfDuration.enabled = NO;
         pgrDuration.enabled = NO;
-//        tfDuration.backgroundColor = color;
+        tfDuration.textColor = colorOrange;
     }
     else {
         tfDuration.enabled = YES;
         pgrDuration.enabled = YES;
-//        tfDuration.backgroundColor = nil;
+        tfDuration.textColor = colorGreen;
     }
-}
-
-- (BOOL)adjustSpeed:(NSString **)aString {
-	NSScanner *scan = [NSScanner localizedScannerWithString: *aString];
-	float f;
-	if ([scan scanFloat:&f]) {
-		f = f * 10;
-		if (f >= 100.0) {
-			f -= 100.0 * floorf(f/100);
-		}
-		NSString *newVal = [NSString localizedStringWithFormat:@"%05.2f", f];
-		*aString = newVal;
-		return YES;
-	}
-	return NO;
-}
-
-- (BOOL)adjustDistance:(NSString **)aString {
-	NSScanner *scan = [NSScanner localizedScannerWithString: *aString];
-	float f;
-	if ([scan scanFloat:&f]) {
-		f = f * 10;
-		if (f >= 1000.0) {
-			f -= 1000.0 * floorf(f/1000);
-		}
-		NSString *newVal = [NSString localizedStringWithFormat:@"%06.2f", f];
-		*aString = newVal;
-		return YES;
-	}
-	return NO;
-}
-
-//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {					
-//	NSString *resultingString;
-//	if (textField == tfSpeed) {
-//        // DEL
-//        if ((string.length == 0) && (range.location == textField.text.length - 1)) {
-//            if (([textField.text characterAtIndex:0] != '#') && ([textField.text characterAtIndex:0] != '-')) {
-//                resultingString = [NSString stringWithFormat:@"0%c%c%c%c", 
-//                               [textField.text characterAtIndex:0],
-//                               [textField.text characterAtIndex:2],
-//                               [textField.text characterAtIndex:1],
-//                               [textField.text characterAtIndex:3]];
-//                textField.text = resultingString;
-//            }
-//            
-//       }
-//		// the input text must be 1 character long and at the end of the string
-//		if ((string.length == 1) && (range.location == textField.text.length)) { 
-//            if (([textField.text characterAtIndex:0] != '#') && ([textField.text characterAtIndex:0] != '-')) {
-//                resultingString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-//                if ([self adjustSpeed:&resultingString]) {
-//                    textField.text = resultingString;
-//                }
-//            }
-//            else {
-//                textField.text = [NSString localizedStringWithFormat:@"%05.2f", [string floatValue]/100];
-//            }
-//		}
-//		return NO;
-//	}
-//	if (textField == tfDistance) {
-//        // DEL
-//        if ((string.length == 0) && (range.location == textField.text.length - 1)) {
-//            if (([textField.text characterAtIndex:0] != '#') && ([textField.text characterAtIndex:0] != '-')) {
-//                resultingString = [NSString stringWithFormat:@"0%c%c%c%c%c", 
-//                                   [textField.text characterAtIndex:0],
-//                                   [textField.text characterAtIndex:1],
-//                                   [textField.text characterAtIndex:3],
-//                                   [textField.text characterAtIndex:2],
-//                                   [textField.text characterAtIndex:4]];
-//                textField.text = resultingString;
-//            }
-//            
-//        }
-//		// the input text must be 1 character long and at the end of the string
-//		if ((string.length == 1) && (range.location == textField.text.length)) { 
-//            if (([textField.text characterAtIndex:0] != '#') && ([textField.text characterAtIndex:0] != '-')) {
-//                resultingString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-//                if ([self adjustDistance:&resultingString]) {
-//                    textField.text = resultingString;
-//                }
-//            }
-//            else {
-//                textField.text = [NSString localizedStringWithFormat:@"%06.2f", [string floatValue]/100];
-//            }
-//		}
-//		return NO;
-//	}
-//    if ((textField == tfDuration) || (textField == tfPace)) {
-//        //DEL
-//        if ((string.length == 0) && (range.location == textField.text.length - 1)) {
-//            if (([textField.text characterAtIndex:0] != '#') && ([textField.text characterAtIndex:0] != '-')) {
-//                resultingString = [NSString stringWithFormat:@"0%c:%c%c:%c%c",
-//                               [textField.text characterAtIndex:0],
-//                               [textField.text characterAtIndex:1],
-//                               [textField.text characterAtIndex:3],
-//                               [textField.text characterAtIndex:4],
-//                               [textField.text characterAtIndex:6]];
-//                textField.text = resultingString;
-//            }
-//        }
-//		// the input text must be 1 character long and at the end of the string
-//		if ((string.length == 1) && (range.location == textField.text.length)) { 
-//            if (([textField.text characterAtIndex:0] != '#') && ([textField.text characterAtIndex:0] != '-')) {
-//                resultingString = [NSString stringWithFormat:@"%c%c:%c%c:%c%c",
-//                               [textField.text characterAtIndex:1],
-//                               [textField.text characterAtIndex:3],
-//                               [textField.text characterAtIndex:4],
-//                               [textField.text characterAtIndex:6],
-//                               [textField.text characterAtIndex:7],
-//                               [string characterAtIndex:0]];
-//                textField.text = resultingString;
-//            }
-//            else {
-//                textField.text = [NSString stringWithFormat:@"00:00:0%c",
-//                                  [string characterAtIndex:0]];
-//            }
-//        }
-//        return NO;
-//    }
-//	return YES;
-//}
-
-//- (BOOL)textFieldShouldClear:(UITextField *)textField {
-//	if (textField == tfSpeed) {
-//		textField.text = [NSString localizedStringWithFormat:@"%05.2f", @"0"];
-//	}
-//    else if (textField == tfDistance) {
-//		textField.text = [NSString localizedStringWithFormat:@"%06.2f", @"0"];
-//    }
-//    else {
-//        textField.text = @"00:00:00";
-//    }
-//	return NO;
-//}
-
-//- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-//    return NO;
-//}
-
-- (void)beginEdit:(id)sender {
-//    UIColor *color = [[UIColor alloc] initWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];
-    if (sender == tfDistance) {
-//        if (viNumericKeyboard.nbDigits != 3) {
-            viNumericKeyboard.nbDigits = 3;
-//            [viNumericKeyboard.picker reloadAllComponents];
-//        }
-        viNumericKeyboard.delegate = sender;
-        [viNumericKeyboard setKeyboardValue:((UITextField *)sender).text];
-//        tfSpeed.backgroundColor = color;
-//        tfPace.backgroundColor = color;
-    }
-    else if (sender == tfDuration) {
-        viDurationKeyboard.delegate = sender;
-//        tfDistance.backgroundColor = color;
-        [viDurationKeyboard setKeyboardValue:((UITextField *)sender).text];
-    }
-    else if (sender == tfSpeed) {
-//        if (viNumericKeyboard.nbDigits != 2) {
-            viNumericKeyboard.nbDigits = 2;
-//            [viNumericKeyboard.picker reloadAllComponents];
-//        }
-        viNumericKeyboard.delegate = sender;
-        [viNumericKeyboard setKeyboardValue:((UITextField *)sender).text];
-//        tfDuration.backgroundColor = color;
-    }
-    else { // tfPace
-        viDurationKeyboard.delegate = sender;
-//        tfDuration.backgroundColor = color;
-        [viDurationKeyboard setKeyboardValue:((UITextField *)sender).text];
-    }
-//    [color release];
-    viKeyboardAccessory.activeControl = sender;
-}
-
-- (void)endEdit:(id)sender {
-//    if (sender == tfDistance) {
-//        tfSpeed.backgroundColor = nil;
-//        tfPace.backgroundColor = nil;
-//    }
-//    else if (sender == tfDuration) {
-//        tfDistance.backgroundColor = nil;
-//    }
-//    else {
-//        tfDuration.backgroundColor = nil;
-//    }
 }
 
 @end
