@@ -47,8 +47,8 @@
 		AA1C8347161B45D000F4F0DA /* RunCalc-BgAccessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA1C8343161B45D000F4F0DA /* RunCalc-BgAccessory@2x.png */; };
 		AA1C8348161B45D000F4F0DA /* RunCalc-ButtonAccessory.png in Resources */ = {isa = PBXBuildFile; fileRef = AA1C8344161B45D000F4F0DA /* RunCalc-ButtonAccessory.png */; };
 		AA1C8349161B45D000F4F0DA /* RunCalc-ButtonAccessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA1C8345161B45D000F4F0DA /* RunCalc-ButtonAccessory@2x.png */; };
+		AA1C8351161C920F00F4F0DA /* KeyboardAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1C8350161C920F00F4F0DA /* KeyboardAccessoryView.m */; };
 		AA94809115ADA1C00067B36B /* RunCalcViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA94809015ADA1C00067B36B /* RunCalcViewController.xib */; };
-		AAFE0D4B16105685004B2814 /* KeyboardAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFE0D4916105685004B2814 /* KeyboardAccessoryView.m */; };
 		AAFE0D4C16105685004B2814 /* KeyboardAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAFE0D4A16105685004B2814 /* KeyboardAccessoryView.xib */; };
 		AAFF5E9015FE39690078BE91 /* coeurJaune.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFF5E7D15FE39690078BE91 /* coeurJaune.png */; };
 		AAFF5E9115FE39690078BE91 /* coeurRouge.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFF5E7E15FE39690078BE91 /* coeurRouge.png */; };
@@ -132,9 +132,9 @@
 		AA1C8343161B45D000F4F0DA /* RunCalc-BgAccessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-BgAccessory@2x.png"; sourceTree = "<group>"; };
 		AA1C8344161B45D000F4F0DA /* RunCalc-ButtonAccessory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-ButtonAccessory.png"; sourceTree = "<group>"; };
 		AA1C8345161B45D000F4F0DA /* RunCalc-ButtonAccessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-ButtonAccessory@2x.png"; sourceTree = "<group>"; };
+		AA1C8350161C920F00F4F0DA /* KeyboardAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardAccessoryView.m; sourceTree = "<group>"; };
 		AA94809015ADA1C00067B36B /* RunCalcViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RunCalcViewController.xib; sourceTree = "<group>"; };
 		AAFE0D4816105685004B2814 /* KeyboardAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardAccessoryView.h; sourceTree = "<group>"; };
-		AAFE0D4916105685004B2814 /* KeyboardAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardAccessoryView.m; sourceTree = "<group>"; };
 		AAFE0D4A16105685004B2814 /* KeyboardAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardAccessoryView.xib; sourceTree = "<group>"; };
 		AAFF5E7D15FE39690078BE91 /* coeurJaune.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coeurJaune.png; sourceTree = "<group>"; };
 		AAFF5E7E15FE39690078BE91 /* coeurRouge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coeurRouge.png; sourceTree = "<group>"; };
@@ -340,7 +340,7 @@
 				45F91904156BEF38001752F7 /* PerCentKeyboardView.m */,
 				45F918C9156BEEB6001752F7 /* PerCentKeyboardView.xib */,
 				AAFE0D4816105685004B2814 /* KeyboardAccessoryView.h */,
-				AAFE0D4916105685004B2814 /* KeyboardAccessoryView.m */,
+				AA1C8350161C920F00F4F0DA /* KeyboardAccessoryView.m */,
 				AAFE0D4A16105685004B2814 /* KeyboardAccessoryView.xib */,
 			);
 			name = Keyboards;
@@ -514,7 +514,7 @@
 				45F91906156BEF38001752F7 /* PerCentKeyboardView.m in Sources */,
 				45820709157522EE00C4C54F /* SimpleHRateFromAgeViewController.m in Sources */,
 				458207101577A8D000C4C54F /* KarvonenHRateFromAgeViewController.m in Sources */,
-				AAFE0D4B16105685004B2814 /* KeyboardAccessoryView.m in Sources */,
+				AA1C8351161C920F00F4F0DA /* KeyboardAccessoryView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
