@@ -10,8 +10,8 @@
 
 @implementation KeyboardAccessoryView
 
-@synthesize delegate;
-@synthesize bDone;
+//@synthesize delegate;
+//@synthesize bDone;
 @synthesize activeControl;
 
 - (id)initWithFrame:(CGRect)frame
