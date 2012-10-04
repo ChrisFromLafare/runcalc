@@ -48,6 +48,8 @@
 		AA1C8348161B45D000F4F0DA /* RunCalc-ButtonAccessory.png in Resources */ = {isa = PBXBuildFile; fileRef = AA1C8344161B45D000F4F0DA /* RunCalc-ButtonAccessory.png */; };
 		AA1C8349161B45D000F4F0DA /* RunCalc-ButtonAccessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA1C8345161B45D000F4F0DA /* RunCalc-ButtonAccessory@2x.png */; };
 		AA94809115ADA1C00067B36B /* RunCalcViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA94809015ADA1C00067B36B /* RunCalcViewController.xib */; };
+		AAC3531B161DD849005A95CA /* KeyboardAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC35319161DD848005A95CA /* KeyboardAccessoryView.m */; };
+		AAC3531C161DD849005A95CA /* KeyboardAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAC3531A161DD849005A95CA /* KeyboardAccessoryView.xib */; };
 		AAFF5E9015FE39690078BE91 /* coeurJaune.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFF5E7D15FE39690078BE91 /* coeurJaune.png */; };
 		AAFF5E9115FE39690078BE91 /* coeurRouge.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFF5E7E15FE39690078BE91 /* coeurRouge.png */; };
 		AAFF5E9215FE39690078BE91 /* coeurVert.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFF5E7F15FE39690078BE91 /* coeurVert.png */; };
@@ -132,6 +134,8 @@
 		AA1C8345161B45D000F4F0DA /* RunCalc-ButtonAccessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-ButtonAccessory@2x.png"; sourceTree = "<group>"; };
 		AA94809015ADA1C00067B36B /* RunCalcViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RunCalcViewController.xib; sourceTree = "<group>"; };
 		AAC35318161DD6A2005A95CA /* KeyboardAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardAccessoryView.h; sourceTree = "<group>"; };
+		AAC35319161DD848005A95CA /* KeyboardAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardAccessoryView.m; sourceTree = "<group>"; };
+		AAC3531A161DD849005A95CA /* KeyboardAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardAccessoryView.xib; sourceTree = "<group>"; };
 		AAFF5E7D15FE39690078BE91 /* coeurJaune.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coeurJaune.png; sourceTree = "<group>"; };
 		AAFF5E7E15FE39690078BE91 /* coeurRouge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coeurRouge.png; sourceTree = "<group>"; };
 		AAFF5E7F15FE39690078BE91 /* coeurVert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coeurVert.png; sourceTree = "<group>"; };
@@ -190,7 +194,6 @@
 		29B97314FDCFA39411CA2CEA /* RunCalc */ = {
 			isa = PBXGroup;
 			children = (
-				AAC35318161DD6A2005A95CA /* KeyboardAccessoryView.h */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				45C52641155A94E600168E93 /* Tabs */,
 				45D7C0EE1556C42B00D90729 /* Keyboards */,
@@ -336,6 +339,9 @@
 				45F91905156BEF38001752F7 /* PerCentKeyboardView.h */,
 				45F91904156BEF38001752F7 /* PerCentKeyboardView.m */,
 				45F918C9156BEEB6001752F7 /* PerCentKeyboardView.xib */,
+				AAC35318161DD6A2005A95CA /* KeyboardAccessoryView.h */,
+				AAC35319161DD848005A95CA /* KeyboardAccessoryView.m */,
+				AAC3531A161DD849005A95CA /* KeyboardAccessoryView.xib */,
 			);
 			name = Keyboards;
 			sourceTree = "<group>";
@@ -478,6 +484,7 @@
 				AA1C8347161B45D000F4F0DA /* RunCalc-BgAccessory@2x.png in Resources */,
 				AA1C8348161B45D000F4F0DA /* RunCalc-ButtonAccessory.png in Resources */,
 				AA1C8349161B45D000F4F0DA /* RunCalc-ButtonAccessory@2x.png in Resources */,
+				AAC3531C161DD849005A95CA /* KeyboardAccessoryView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +514,7 @@
 				45F91906156BEF38001752F7 /* PerCentKeyboardView.m in Sources */,
 				45820709157522EE00C4C54F /* SimpleHRateFromAgeViewController.m in Sources */,
 				458207101577A8D000C4C54F /* KarvonenHRateFromAgeViewController.m in Sources */,
+				AAC3531B161DD849005A95CA /* KeyboardAccessoryView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
