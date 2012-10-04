@@ -131,7 +131,6 @@
 		AA1C8344161B45D000F4F0DA /* RunCalc-ButtonAccessory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-ButtonAccessory.png"; sourceTree = "<group>"; };
 		AA1C8345161B45D000F4F0DA /* RunCalc-ButtonAccessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-ButtonAccessory@2x.png"; sourceTree = "<group>"; };
 		AA94809015ADA1C00067B36B /* RunCalcViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RunCalcViewController.xib; sourceTree = "<group>"; };
-		AAFE0D4816105685004B2814 /* KeyboardAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardAccessoryView.h; sourceTree = "<group>"; };
 		AAFF5E7D15FE39690078BE91 /* coeurJaune.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coeurJaune.png; sourceTree = "<group>"; };
 		AAFF5E7E15FE39690078BE91 /* coeurRouge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coeurRouge.png; sourceTree = "<group>"; };
 		AAFF5E7F15FE39690078BE91 /* coeurVert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coeurVert.png; sourceTree = "<group>"; };
@@ -335,7 +334,6 @@
 				45F91905156BEF38001752F7 /* PerCentKeyboardView.h */,
 				45F91904156BEF38001752F7 /* PerCentKeyboardView.m */,
 				45F918C9156BEEB6001752F7 /* PerCentKeyboardView.xib */,
-				AAFE0D4816105685004B2814 /* KeyboardAccessoryView.h */,
 			);
 			name = Keyboards;
 			sourceTree = "<group>";
