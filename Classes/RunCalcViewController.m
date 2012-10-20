@@ -13,7 +13,8 @@
 #define BUTTON_SHADOW_LENGTH 178 // LONGUEUR de l'ombre dégradée a gauche et a droite du bouton
 
 @interface RunCalcViewController() 
-@property (nonatomic) UIControl *activeControl;
+@property (nonatomic) BOOL keyboardShown;
+@property (nonatomic) CGFloat heightCoveredByKeyboard;
 @end
 
 @implementation RunCalcViewController
@@ -27,8 +28,7 @@
 @synthesize viDurationKeyboard, viNumericKeyboard, viKeyboardAccessory;
 @synthesize ivButtonSpeed, ivButtonDistance, ivButtonDuration;
 @synthesize pgrSpeed, pgrDistance, pgrDuration;
-@synthesize activeControl; // Contain the active control, used the define if scrolling is required
-                            // to have the active control visible (not hidden by the keyboard)
+@synthesize keyboardShown, heightCoveredByKeyboard;
 
 enum RCParameter {SPEED=1, DURATION=2, DISTANCE=3} calcVar;
 
@@ -135,8 +135,8 @@ enum RCParameter {SPEED=1, DURATION=2, DISTANCE=3} calcVar;
 }
 
 -(void) viewDidAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [[NSNotificationCenter  defaultCenter]addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+    [super viewDidAppear:animated];
+    [[NSNotificationCenter  defaultCenter]addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillDisappear:) name:UIKeyboardWillHideNotification object:nil];
 }
 
@@ -147,35 +147,64 @@ enum RCParameter {SPEED=1, DURATION=2, DISTANCE=3} calcVar;
 }
 
 #pragma mark - Keyboard management
-- (void) keyboardWasShown: (NSNotification *)aNotification {
+- (void) keyboardWillShow: (NSNotification *)aNotification {
+    keyboardShown = YES;
     // Get the keyboard height
     // ISC: in Screen Coordinate, IWC in Window coordinate, IVC in View coordinate
     CGRect keyboardEndFrameISC;
     [[aNotification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardEndFrameISC];
     CGRect keyboardEndFrameIWC = [self.scrollView.window convertRect:keyboardEndFrameISC fromWindow:nil];
-    CGRect keyboardEndFrameIVC = [self.view convertRect:keyboardEndFrameIWC fromView:nil];
-    // Compute the height covered by the keyboard (difference between the bottom of the view and the top of the keyboard
-    CGFloat heightCoveredByKeyboard = self.view.frame.size.height - keyboardEndFrameIVC.origin.y;    
-    // Set the scrollview insets accordingly
-    UIEdgeInsets insets = UIEdgeInsetsMake(0, 0, heightCoveredByKeyboard, 0);
-    self.scrollView.contentInset = insets;
-    self.scrollView.scrollIndicatorInsets = insets;
-    // Get the activeControl's bottom left corner coordinates 
-    CGRect activeControlFrameIVC = [self.view convertRect:activeControl.frame fromView:activeControl.superview];
+    CGRect keyboardSize = [self.view convertRect:keyboardEndFrameIWC fromView:nil];
+    self.heightCoveredByKeyboard = self.view.frame.size.height - keyboardSize.origin.y;    
+    [self makeTextFieldVisible: aNotification.userInfo];
+}
+
+-(void) makeTextFieldVisible: (NSDictionary *)userInfo {
+    CGPoint scrollPoint;
+    // Set the scrollview insets accordingly to the height covered by the keyboard
+    UIEdgeInsets insets = UIEdgeInsetsMake(0, 0, self.heightCoveredByKeyboard, 0);
+    // Get the scroll bottom left corner coordinates
+    CGRect svFrameIVC = [self.view convertRect:self.scrollView.frame fromView:self.scrollView.superview];
+    // Get the activeControl's bottom left corner coordinates
+    CGRect activeControlFrameIVC = [self.view convertRect:self.viKeyboardAccessory.activeControl.frame fromView:self.viKeyboardAccessory.activeControl.superview];
     CGPoint baseControl = activeControlFrameIVC.origin;
-    baseControl.y += activeControlFrameIVC.size.height;
-    // if the activeControl's bottom corner is hidden by the keyboard scroll up to make it visible
-    if (CGRectContainsPoint(keyboardEndFrameIVC, baseControl)) {
-        CGPoint scrollPoint = CGPointMake(0.0, baseControl.y - keyboardEndFrameIVC.origin.y);
-        [scrollView setContentOffset:scrollPoint animated:YES];
+    if (baseControl.y < svFrameIVC.origin.y) {
+        scrollPoint = CGPointMake(0.0, self.scrollView.contentOffset.y + baseControl.y - svFrameIVC.origin.y);
+        [self scrollViewSetInsets:insets andContentOffset:scrollPoint givenUserInfo: userInfo];
+    }
+    else {
+        baseControl.y += activeControlFrameIVC.size.height;
+        // if the activeControl's bottom corner is hidden by the keyboard scroll up to make it visible
+        if (svFrameIVC.origin.y + svFrameIVC.size.height - self.heightCoveredByKeyboard < baseControl.y) {
+            scrollPoint = CGPointMake(0.0, self.scrollView.contentOffset.y + baseControl.y - (svFrameIVC.origin.y + svFrameIVC.size.height - self.heightCoveredByKeyboard));
+            [self scrollViewSetInsets:insets andContentOffset:scrollPoint givenUserInfo:userInfo];
+        }
+        else
+            [self scrollViewSetInsets:insets andContentOffset:self.scrollView.contentOffset givenUserInfo:userInfo];
     }
 }
 
 // Reset the scrollview insets
 -(void) keyboardWillDisappear: (NSNotification *)aNotification {
+    keyboardShown = NO;
     UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-    scrollView.contentInset = contentInsets;
-    scrollView.scrollIndicatorInsets = contentInsets;    
+    [self scrollViewSetInsets:contentInsets andContentOffset: CGPointMake(0.0, 0.0) givenUserInfo:aNotification.userInfo];
+}
+
+// Perform scrolling
+-(void) scrollViewSetInsets: (UIEdgeInsets)insets andContentOffset: (CGPoint)offset givenUserInfo: (NSDictionary *)userInfo {
+    double duration = 0.5;
+    UIViewAnimationCurve animationCurve = UIViewAnimationCurveEaseInOut;
+    if (userInfo != nil) {
+        duration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+        animationCurve = [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
+    }
+    UIViewAnimationOptions animationOptions = animationCurve;
+    [UIView animateWithDuration:duration delay:0 options:animationOptions animations:^{
+        self.scrollView.contentInset = insets;
+        self.scrollView.scrollIndicatorInsets = insets;    
+        self.scrollView.contentOffset = offset;
+    } completion: nil];
 }
 
 #pragma mark - UIComponents update
@@ -371,7 +400,6 @@ enum RCParameter {SPEED=1, DURATION=2, DISTANCE=3} calcVar;
 }
 
 - (IBAction)beginEdit:(id)sender {
-    activeControl = sender;
     if (sender == tfDistance) {
         viNumericKeyboard.nbDigits = 3;
         viNumericKeyboard.delegate = sender;
@@ -390,7 +418,10 @@ enum RCParameter {SPEED=1, DURATION=2, DISTANCE=3} calcVar;
         viDurationKeyboard.delegate = sender;
         [viDurationKeyboard setKeyboardValue:((UITextField *)sender).text];
     }
+    // Register the active control (used to resign first responder)
     viKeyboardAccessory.activeControl = sender;
+    // Scroll the scroll up/down if required
+    [self makeTextFieldVisible:nil];
 }
 
 #pragma mark - Gesture recognizer delegate implementation

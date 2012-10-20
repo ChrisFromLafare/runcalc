@@ -43,7 +43,7 @@
 							<object class="IBUIImageView" id="976519863">
 								<reference key="NSNextResponder" ref="986146393"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{11, 2}, {35, 35}}</string>
+								<string key="NSFrame">{{11, 4}, {35, 35}}</string>
 								<reference key="NSSuperview" ref="986146393"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="339564929"/>
@@ -55,7 +55,7 @@
 							<object class="IBUILabel" id="339564929">
 								<reference key="NSNextResponder" ref="986146393"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{54, 7}, {58, 21}}</string>
+								<string key="NSFrame">{{60, 11}, {71, 21}}</string>
 								<reference key="NSSuperview" ref="986146393"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="479158885"/>
@@ -74,21 +74,21 @@
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">0</int>
 								<float key="IBUIMinimumFontSize">10</float>
-								<int key="IBUITextAlignment">2</int>
-								<object class="IBUIFontDescription" key="IBUIFontDescription" id="72407887">
+								<object class="IBUIFontDescription" key="IBUIFontDescription" id="742753535">
 									<int key="type">2</int>
-									<double key="pointSize">17</double>
+									<double key="pointSize">20</double>
 								</object>
-								<object class="NSFont" key="IBUIFont" id="826375860">
+								<object class="NSFont" key="IBUIFont" id="779445051">
 									<string key="NSName">Helvetica-Bold</string>
-									<double key="NSSize">17</double>
+									<double key="NSSize">20</double>
 									<int key="NSfFlags">16</int>
 								</object>
+								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 							</object>
 							<object class="IBUILabel" id="479158885">
 								<reference key="NSNextResponder" ref="986146393"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{213, 7}, {87, 21}}</string>
+								<string key="NSFrame">{{213, 11}, {87, 21}}</string>
 								<reference key="NSSuperview" ref="986146393"/>
 								<reference key="NSWindow"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -99,22 +99,20 @@
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<string key="IBUIText">180</string>
-								<object class="NSColor" key="IBUITextColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MCAwIDAAA</bytes>
-								</object>
-								<object class="NSColor" key="IBUIHighlightedColor">
+								<object class="NSColor" key="IBUITextColor" id="884600943">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MQA</bytes>
 								</object>
+								<reference key="IBUIHighlightedColor" ref="884600943"/>
 								<int key="IBUIBaselineAdjustment">0</int>
 								<float key="IBUIMinimumFontSize">10</float>
 								<int key="IBUITextAlignment">2</int>
-								<reference key="IBUIFontDescription" ref="72407887"/>
-								<reference key="IBUIFont" ref="826375860"/>
+								<reference key="IBUIFontDescription" ref="742753535"/>
+								<reference key="IBUIFont" ref="779445051"/>
+								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 							</object>
 						</array>
-						<string key="NSFrameSize">{320, 39}</string>
+						<string key="NSFrameSize">{320, 43}</string>
 						<reference key="NSSuperview" ref="616492026"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="976519863"/>
@@ -130,11 +128,15 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</array>
-				<string key="NSFrameSize">{320, 40}</string>
+				<string key="NSFrameSize">{320, 44}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="986146393"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
+				<object class="NSColor" key="IBUIBackgroundColor">
+					<int key="NSColorSpace">1</int>
+					<bytes key="NSRGB">MCAwIDAAA</bytes>
+				</object>
 				<bool key="IBUIUserInteractionEnabled">NO</bool>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<reference key="IBUIContentView" ref="986146393"/>
@@ -176,9 +178,9 @@
 						<int key="objectID">2</int>
 						<reference key="object" ref="616492026"/>
 						<array class="NSMutableArray" key="children">
+							<reference ref="976519863"/>
 							<reference ref="339564929"/>
 							<reference ref="479158885"/>
-							<reference ref="976519863"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -224,11 +226,16 @@
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="backgroundTouched:">id</string>
+						<string key="beginEditing:">id</string>
 						<string key="calcFrequencies:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="backgroundTouched:">
 							<string key="name">backgroundTouched:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="beginEditing:">
+							<string key="name">beginEditing:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="calcFrequencies:">
@@ -237,25 +244,15 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="scSex">UISegmentedControl</string>
 						<string key="tcHRate">UITableViewCell</string>
-						<string key="tfAge">UITextField</string>
 						<string key="tfMaxRate">UITextField</string>
 						<string key="tfRestRate">UITextField</string>
 						<string key="tvRates">UITableView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="scSex">
-							<string key="name">scSex</string>
-							<string key="candidateClassName">UISegmentedControl</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="tcHRate">
 							<string key="name">tcHRate</string>
 							<string key="candidateClassName">UITableViewCell</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="tfAge">
-							<string key="name">tfAge</string>
-							<string key="candidateClassName">UITextField</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="tfMaxRate">
 							<string key="name">tfMaxRate</string>

@@ -10,7 +10,7 @@
 #import "NumericKeyboardView.h"
 #import "DurationKeyboardView.h"
 
-@interface DistanceConvViewController : UIViewController {
+@interface DistanceConvViewController : UIViewController <UITextFieldDelegate> {
     UITextField *tfKm;
     UITextField *tfMiles;
     NumericKeyboardView *viNumericKeyboard;

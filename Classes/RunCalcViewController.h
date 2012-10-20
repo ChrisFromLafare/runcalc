@@ -15,7 +15,7 @@
 
 @interface RunCalcViewController : UIViewController <UITextFieldDelegate, UIGestureRecognizerDelegate> {
     RunCalcModel *runCalcModel;
-    UIScrollView *srollView;
+    UIScrollView *scrollView;
 	UITextField *tfSpeed;
 	UITextField *tfDistance;
 	UITextField *tfDuration;

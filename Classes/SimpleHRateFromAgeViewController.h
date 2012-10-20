@@ -10,7 +10,7 @@
 #import "HRateCellView.h"
 #import "NumericKeyboardView.h"
 
-@interface SimpleHRateFromAgeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface SimpleHRateFromAgeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate> {
     UITextField *tfAge;
     UISegmentedControl *scSex;
     UITableView *tvRates;

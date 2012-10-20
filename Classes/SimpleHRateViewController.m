@@ -7,10 +7,11 @@
 //
 
 #import "SimpleHRateViewController.h"
+#import "KeyboardAccessoryView.h"
 #import "RCHeartRate.h"
 
 @interface SimpleHRateViewController ()
-
+@property (nonatomic) IBOutlet UIImageView *uivHRM;
 @end
 
 @implementation SimpleHRateViewController
@@ -18,11 +19,14 @@
 @synthesize tfMaxRate, rates;
 @synthesize tcHRate, tvRates;
 @synthesize viNumericKeyboard;
+@synthesize uivHRM;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"RunCalc-Bg2.png"]];
+    self.navigationItem.title = @"HR%(HRM)";
     // load the keyboard
     NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"NumericKeyboardView" owner:self options:nil];
     self.viNumericKeyboard = (NumericKeyboardView *)[views objectAtIndex:0];
@@ -31,6 +35,9 @@
     viNumericKeyboard.nbFrac=0;
     self.tfMaxRate.inputView = self.viNumericKeyboard;
     viNumericKeyboard.delegate = tfMaxRate;
+    views = [[NSBundle mainBundle] loadNibNamed:@"KeyboardAccessoryView" owner:self options:nil];
+    self.tfMaxRate.inputAccessoryView = (KeyboardAccessoryView *)[views objectAtIndex:0];
+
 }
 
 - (void)viewDidUnload
@@ -155,6 +162,7 @@
 
 - (void)beginEditing:(id)sender {
     [viNumericKeyboard setKeyboardValue:((UITextField *)sender).text];
+    ((KeyboardAccessoryView *)((UITextField *)sender).inputAccessoryView).activeControl = sender;
 }
 
 - (void)calcFrequencies:(id)sender {

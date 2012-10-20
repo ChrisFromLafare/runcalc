@@ -10,7 +10,7 @@
 #import "NumericKeyboardView.h"
 #import "DurationKeyboardView.h"
 
-@interface SpeedConvViewController : UIViewController {
+@interface SpeedConvViewController : UIViewController <UITextFieldDelegate> {
     UITextField *tfKmH;
     UITextField *tfMiH;
     UITextField *tfMnKm;
@@ -19,6 +19,7 @@
     DurationKeyboardView *viDurationKeyboard;
 }
 
+@property (nonatomic) IBOutlet UIScrollView *scrollView;
 @property (nonatomic) IBOutlet UITextField *tfMnKm;
 @property (nonatomic) IBOutlet UITextField *tfMnMi;
 @property (nonatomic) IBOutlet UITextField *tfKmH;

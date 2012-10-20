@@ -50,6 +50,15 @@
 		AA94809115ADA1C00067B36B /* RunCalcViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA94809015ADA1C00067B36B /* RunCalcViewController.xib */; };
 		AAC3531B161DD849005A95CA /* KeyboardAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC35319161DD848005A95CA /* KeyboardAccessoryView.m */; };
 		AAC3531C161DD849005A95CA /* KeyboardAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAC3531A161DD849005A95CA /* KeyboardAccessoryView.xib */; };
+		AAFA7D4B16231996000DDE4F /* RunCalc-Cell44.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFA7D4916231996000DDE4F /* RunCalc-Cell44.png */; };
+		AAFA7D4C16231996000DDE4F /* RunCalc-Cell44@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFA7D4A16231996000DDE4F /* RunCalc-Cell44@2x.png */; };
+		AAFA7D50162329FD000DDE4F /* CustomColoredAccessory.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFA7D4F162329FD000DDE4F /* CustomColoredAccessory.m */; };
+		AAFA7D6316257EA1000DDE4F /* RunCalc-Bg2.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFA7D5D16257EA0000DDE4F /* RunCalc-Bg2.png */; };
+		AAFA7D6416257EA1000DDE4F /* RunCalc-Bg2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFA7D5E16257EA0000DDE4F /* RunCalc-Bg2@2x.png */; };
+		AAFA7D6516257EA1000DDE4F /* RunCalc-CadreTF.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFA7D5F16257EA0000DDE4F /* RunCalc-CadreTF.png */; };
+		AAFA7D6616257EA1000DDE4F /* RunCalc-CadreTF@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFA7D6016257EA0000DDE4F /* RunCalc-CadreTF@2x.png */; };
+		AAFA7D6716257EA1000DDE4F /* RunCalc-CadreTFSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFA7D6116257EA0000DDE4F /* RunCalc-CadreTFSelected.png */; };
+		AAFA7D6816257EA1000DDE4F /* RunCalc-CadreTFSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFA7D6216257EA0000DDE4F /* RunCalc-CadreTFSelected@2x.png */; };
 		AAFF5E9015FE39690078BE91 /* coeurJaune.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFF5E7D15FE39690078BE91 /* coeurJaune.png */; };
 		AAFF5E9115FE39690078BE91 /* coeurRouge.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFF5E7E15FE39690078BE91 /* coeurRouge.png */; };
 		AAFF5E9215FE39690078BE91 /* coeurVert.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFF5E7F15FE39690078BE91 /* coeurVert.png */; };
@@ -136,6 +145,16 @@
 		AAC35318161DD6A2005A95CA /* KeyboardAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardAccessoryView.h; sourceTree = "<group>"; };
 		AAC35319161DD848005A95CA /* KeyboardAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardAccessoryView.m; sourceTree = "<group>"; };
 		AAC3531A161DD849005A95CA /* KeyboardAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardAccessoryView.xib; sourceTree = "<group>"; };
+		AAFA7D4916231996000DDE4F /* RunCalc-Cell44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-Cell44.png"; sourceTree = "<group>"; };
+		AAFA7D4A16231996000DDE4F /* RunCalc-Cell44@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-Cell44@2x.png"; sourceTree = "<group>"; };
+		AAFA7D4E162329FD000DDE4F /* CustomColoredAccessory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomColoredAccessory.h; sourceTree = "<group>"; };
+		AAFA7D4F162329FD000DDE4F /* CustomColoredAccessory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomColoredAccessory.m; sourceTree = "<group>"; };
+		AAFA7D5D16257EA0000DDE4F /* RunCalc-Bg2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-Bg2.png"; sourceTree = "<group>"; };
+		AAFA7D5E16257EA0000DDE4F /* RunCalc-Bg2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-Bg2@2x.png"; sourceTree = "<group>"; };
+		AAFA7D5F16257EA0000DDE4F /* RunCalc-CadreTF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-CadreTF.png"; sourceTree = "<group>"; };
+		AAFA7D6016257EA0000DDE4F /* RunCalc-CadreTF@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-CadreTF@2x.png"; sourceTree = "<group>"; };
+		AAFA7D6116257EA0000DDE4F /* RunCalc-CadreTFSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-CadreTFSelected.png"; sourceTree = "<group>"; };
+		AAFA7D6216257EA0000DDE4F /* RunCalc-CadreTFSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-CadreTFSelected@2x.png"; sourceTree = "<group>"; };
 		AAFF5E7D15FE39690078BE91 /* coeurJaune.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coeurJaune.png; sourceTree = "<group>"; };
 		AAFF5E7E15FE39690078BE91 /* coeurRouge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coeurRouge.png; sourceTree = "<group>"; };
 		AAFF5E7F15FE39690078BE91 /* coeurVert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coeurVert.png; sourceTree = "<group>"; };
@@ -176,6 +195,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				AAFA7D4D162329AB000DDE4F /* Utilities */,
 				CE87163C152356430096345D /* Model */,
 				1D3623240D0F684500981E51 /* RunCalcAppDelegate.h */,
 				1D3623250D0F684500981E51 /* RunCalcAppDelegate.m */,
@@ -297,8 +317,8 @@
 				45BB9BBF1565779B00472168 /* HRateTableViewController.h */,
 				45BB9BC01565779B00472168 /* HRateTableViewController.m */,
 				45BB9BBD156575FC00472168 /* HRateTableViewController.xib */,
-				45F918BF156A91D4001752F7 /* HRateCellView.xib */,
 				45F918C8156BE69D001752F7 /* HRateCellView.h */,
+				45F918BF156A91D4001752F7 /* HRateCellView.xib */,
 				458207041575216900C4C54F /* Single HRate from Age */,
 				45BB9BC21566071B00472168 /* Simple HRate from HRM */,
 				45BB9BC915660E7E00472168 /* Karvonen HRate from Age & Sex */,
@@ -346,9 +366,26 @@
 			name = Keyboards;
 			sourceTree = "<group>";
 		};
+		AAFA7D4D162329AB000DDE4F /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				AAFA7D4E162329FD000DDE4F /* CustomColoredAccessory.h */,
+				AAFA7D4F162329FD000DDE4F /* CustomColoredAccessory.m */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
 		AAFF5E7C15FE39690078BE91 /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
+				AAFA7D5D16257EA0000DDE4F /* RunCalc-Bg2.png */,
+				AAFA7D5E16257EA0000DDE4F /* RunCalc-Bg2@2x.png */,
+				AAFA7D5F16257EA0000DDE4F /* RunCalc-CadreTF.png */,
+				AAFA7D6016257EA0000DDE4F /* RunCalc-CadreTF@2x.png */,
+				AAFA7D6116257EA0000DDE4F /* RunCalc-CadreTFSelected.png */,
+				AAFA7D6216257EA0000DDE4F /* RunCalc-CadreTFSelected@2x.png */,
+				AAFA7D4916231996000DDE4F /* RunCalc-Cell44.png */,
+				AAFA7D4A16231996000DDE4F /* RunCalc-Cell44@2x.png */,
 				AA1C8342161B45D000F4F0DA /* RunCalc-BgAccessory.png */,
 				AA1C8343161B45D000F4F0DA /* RunCalc-BgAccessory@2x.png */,
 				AA1C8344161B45D000F4F0DA /* RunCalc-ButtonAccessory.png */,
@@ -485,6 +522,14 @@
 				AA1C8348161B45D000F4F0DA /* RunCalc-ButtonAccessory.png in Resources */,
 				AA1C8349161B45D000F4F0DA /* RunCalc-ButtonAccessory@2x.png in Resources */,
 				AAC3531C161DD849005A95CA /* KeyboardAccessoryView.xib in Resources */,
+				AAFA7D4B16231996000DDE4F /* RunCalc-Cell44.png in Resources */,
+				AAFA7D4C16231996000DDE4F /* RunCalc-Cell44@2x.png in Resources */,
+				AAFA7D6316257EA1000DDE4F /* RunCalc-Bg2.png in Resources */,
+				AAFA7D6416257EA1000DDE4F /* RunCalc-Bg2@2x.png in Resources */,
+				AAFA7D6516257EA1000DDE4F /* RunCalc-CadreTF.png in Resources */,
+				AAFA7D6616257EA1000DDE4F /* RunCalc-CadreTF@2x.png in Resources */,
+				AAFA7D6716257EA1000DDE4F /* RunCalc-CadreTFSelected.png in Resources */,
+				AAFA7D6816257EA1000DDE4F /* RunCalc-CadreTFSelected@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,6 +560,7 @@
 				45820709157522EE00C4C54F /* SimpleHRateFromAgeViewController.m in Sources */,
 				458207101577A8D000C4C54F /* KarvonenHRateFromAgeViewController.m in Sources */,
 				AAC3531B161DD849005A95CA /* KeyboardAccessoryView.m in Sources */,
+				AAFA7D50162329FD000DDE4F /* CustomColoredAccessory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

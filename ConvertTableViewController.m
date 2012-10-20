@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#import "CustomColoredAccessory.h"
 #import "ConvertTableViewController.h"
 #import "DistanceConvViewController.h"
 #import "SpeedConvViewController.h"
@@ -38,6 +39,7 @@
     v.title = @"Speed";
     [a addObject:v];
     self.controllers = a;
+    self.view.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"RunCalc-Bg2.png"]];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -78,12 +80,18 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ConvertersCell"];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.textLabel.textColor = [UIColor whiteColor];
+        CustomColoredAccessory *cca = [CustomColoredAccessory accessoryWithColor: [UIColor whiteColor]];
+        cell.accessoryView = cca;
     }
     cell.textLabel.text = [[controllers objectAtIndex:indexPath.row] title];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
+-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"RunCalc-Cell44.png"]];
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

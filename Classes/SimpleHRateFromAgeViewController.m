@@ -6,11 +6,14 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#import "KeyboardAccessoryView.h"
 #import "SimpleHRateFromAgeViewController.h"
 #import "RCHeartRate.h"
 
-@interface SimpleHRateFromAgeViewController ()
-
+@interface SimpleHRateFromAgeViewController () {
+    UIImageView *uivAge;
+}
+@property (nonatomic) IBOutlet UIImageView *uivAge;
 @end
 
 @implementation SimpleHRateFromAgeViewController
@@ -18,19 +21,31 @@
 @synthesize tfAge, scSex, rates;
 @synthesize tcHRate, tvRates;
 @synthesize viNumericKeyboard;
+@synthesize uivAge;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     // load the keyboard
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"RunCalc-Bg2.png"]];
     NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"NumericKeyboardView" owner:self options:nil];
     self.viNumericKeyboard = (NumericKeyboardView *)[views objectAtIndex:0];
     viNumericKeyboard.leadingZeros = YES;
-    viNumericKeyboard.nbDigits=2;
-    viNumericKeyboard.nbFrac=0;
+    viNumericKeyboard.nbDigits = 2;
+    viNumericKeyboard.nbFrac = 0;
     self.tfAge.inputView = self.viNumericKeyboard;
     viNumericKeyboard.delegate = tfAge;
+    views = [[NSBundle mainBundle] loadNibNamed:@"KeyboardAccessoryView" owner:self options:nil];
+    self.tfAge.inputAccessoryView = (KeyboardAccessoryView *)[views objectAtIndex:0];
+    self.navigationItem.title = @"HR%(Sex, Age)";
+    // Add segmented button to navigation controller
+    scSex = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"M", @"F", nil]];
+    scSex.segmentedControlStyle = UISegmentedControlStyleBar;
+    scSex.selectedSegmentIndex = 0;
+    [scSex addTarget:self action:@selector(calcFrequencies:) forControlEvents:UIControlEventValueChanged];
+    UIBarButtonItem *uib = [[UIBarButtonItem alloc] initWithCustomView:scSex];
+    [self.navigationItem setRightBarButtonItem: uib];
 }
 
 - (void)viewDidUnload
@@ -65,7 +80,15 @@
     return rates.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (scSex.selectedSegmentIndex == MALE)
+        return @"HR% for men";
+    else {
+        return @"HR% for women";
+    }
+}
+    
+    - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     static NSString *CellIdentifier = @"HRCell";
@@ -98,6 +121,9 @@
     return cell;
 }
 
+-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"RunCalc-Cell44.png"]];
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -155,7 +181,15 @@
 #pragma mark Actions implementation
 
 - (void)beginEditing:(id)sender {
+    self.uivAge.highlighted = YES;
     [viNumericKeyboard setKeyboardValue:((UITextField *)sender).text];
+    KeyboardAccessoryView *kbv = (KeyboardAccessoryView *)((UITextField *)sender).inputAccessoryView;
+    kbv.activeControl = sender;
+    
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    self.uivAge.highlighted = NO;
 }
 
 - (void)calcFrequencies:(id)sender {
@@ -164,20 +198,21 @@
     int age = [tfAge.text intValue];
     if (age != 0) {
         heartRate = [[RCHeartRate alloc] initWithSex:sex andAge:age];
+        NSMutableArray  *tempRates = [[NSMutableArray alloc] initWithCapacity:10];
+        for (int i = 0; i < 10; i++) {
+            [tempRates addObject:[NSString stringWithFormat:@"%3d",
+                                  [heartRate PerCent: 1 - 0.05 * i]]];
+        }
+        self.rates = tempRates;
     }
     else {
-        return;
+        self.rates = nil;
     }
-    NSMutableArray  *tempRates = [[NSMutableArray alloc] initWithCapacity:10];
-    for (int i = 0; i < 10; i++) {
-        [tempRates addObject:[NSString stringWithFormat:@"%3d",
-                              [heartRate PerCent: 1 - 0.05 * i]]];
-    }
-    self.rates = tempRates;
     [tvRates reloadData];
 }
 
 - (void)backgroundTouched:(id)sender {
+    self.uivAge.highlighted = NO;
     [tfAge resignFirstResponder];
     [self calcFrequencies:sender];
 }
