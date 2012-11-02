@@ -21,7 +21,7 @@
 
 @synthesize runCalcModel;
 @synthesize scrollView;
-@synthesize tfSpeed, tfDistance, tfDuration, tfPace;
+@synthesize bSpeed, bDistance, bDuration, bPace;
 @synthesize scUnit;
 @synthesize lblHalfMarathon, lblMarathon, lblDistanceUnit, lblPaceUnit, lblSpeedUnit;
 @synthesize lblDistanceUnit1, lblPaceUnit1, lblSpeedUnit1;
@@ -68,28 +68,28 @@ enum RCParameter {SPEED=1, DURATION=2, DISTANCE=3} calcVar;
     RCDistance *rd = [[RCDistance alloc] initWithDistance:1.0];
     runCalcModel = [[RunCalcModel alloc] initWithDistance:rd andSpeed:rs];
     runCalcModel.unit = UNIT_KM;
-    tfSpeed.text = [runCalcModel.speed stringValue];
-    tfDistance.text = [runCalcModel.distance stringValue];
-    tfDuration.text = [runCalcModel.duration stringValue];
-    tfPace.text = [runCalcModel.speed stringValueForPace];
+    [bSpeed setTextWithoutValueChangedEvent: [runCalcModel.speed stringValue]];
+    [bDistance setTextWithoutValueChangedEvent: [runCalcModel.distance stringValue]];
+    [bDuration setTextWithoutValueChangedEvent: [runCalcModel.duration stringValue]];
+    bPace.text = [runCalcModel.speed stringValueForPace];
     // load specific keyboards & accessory 
     NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"NumericKeyboardView" owner:self options:nil];
     self.viNumericKeyboard = (NumericKeyboardView *)[views objectAtIndex:0];
     viNumericKeyboard.leadingZeros = YES;
     viNumericKeyboard.nbDigits=3;
     viNumericKeyboard.nbFrac=2;
-    self.tfDistance.inputView = self.viNumericKeyboard;
-    self.tfSpeed.inputView = self.viNumericKeyboard;
+    self.bDistance.inputView = self.viNumericKeyboard;
+    self.bSpeed.inputView = self.viNumericKeyboard;
     views = [[NSBundle mainBundle] loadNibNamed:@"DurationKeyboardView" owner:self options:nil];
     self.viDurationKeyboard = (DurationKeyboardView *)[views objectAtIndex:0];
-    self.tfDuration.inputView = viDurationKeyboard;
-    self.tfPace.inputView = viDurationKeyboard;
+    self.bDuration.inputView = viDurationKeyboard;
+    self.bPace.inputView = viDurationKeyboard;
     views = [[NSBundle mainBundle] loadNibNamed:@"KeyboardAccessoryView" owner:self options:nil];
     self.viKeyboardAccessory = (KeyboardAccessoryView *)[views objectAtIndex:0];
-    self.tfPace.inputAccessoryView = viKeyboardAccessory;
-    self.tfDuration.inputAccessoryView = viKeyboardAccessory;
-    self.tfDistance.inputAccessoryView = viKeyboardAccessory;
-    self.tfSpeed.inputAccessoryView = viKeyboardAccessory;
+    self.bPace.inputAccessoryView = viKeyboardAccessory;
+    self.bDuration.inputAccessoryView = viKeyboardAccessory;
+    self.bDistance.inputAccessoryView = viKeyboardAccessory;
+    self.bSpeed.inputAccessoryView = viKeyboardAccessory;
     // lock the distance
     [self lockVariable: DISTANCE];
 }
@@ -113,11 +113,11 @@ enum RCParameter {SPEED=1, DURATION=2, DISTANCE=3} calcVar;
 - (void)viewDidUnload {
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
-	self.tfSpeed = nil;
-	self.tfDistance = nil;
-	self.tfDuration = nil;
+	self.bSpeed = nil;
+	self.bDistance = nil;
+	self.bDuration = nil;
     self.runCalcModel = nil;
-    self.tfPace = nil;
+    self.bPace = nil;
     self.scUnit = nil;
     self.lblMarathon = nil;
     self.lblHalfMarathon = nil;
@@ -215,52 +215,52 @@ enum RCParameter {SPEED=1, DURATION=2, DISTANCE=3} calcVar;
 
 - (void) speedChanged {	
 	// Get speed 
-    RCSpeed *rs = [[RCSpeed alloc] initWithString: tfSpeed.text];
+    RCSpeed *rs = [[RCSpeed alloc] initWithString: bSpeed.text];
     if (calcVar == DURATION) {
-        RCDistance *rd = [[RCDistance alloc] initWithString: tfDistance.text];
+        RCDistance *rd = [[RCDistance alloc] initWithString: bDistance.text];
         runCalcModel = [[RunCalcModel alloc] initWithDistance: rd andSpeed: rs];
-        tfDuration.text = [runCalcModel.duration stringValue];
+        [bDuration setTextWithoutValueChangedEvent: [runCalcModel.duration stringValue]];
     }
     else {
-        RCTimeInterval *rt = [[RCTimeInterval alloc] initWithString:tfDuration.text];
+        RCTimeInterval *rt = [[RCTimeInterval alloc] initWithString:bDuration.text];
         runCalcModel = [[RunCalcModel alloc] initWithSpeed:rs andDuration:rt];
-        tfDistance.text = [runCalcModel.distance stringValue];
+        [bDistance setTextWithoutValueChangedEvent: [runCalcModel.distance stringValue]];
     }
-    tfPace.text = [rs stringValueForPace];
+    [bPace setTextWithoutValueChangedEvent: [rs stringValueForPace]];
     [self updateRuns];
 }
 
 - (void) paceChanged {	
 	// Get speed (as pace)
-    RCSpeed *rs = [[RCSpeed alloc] initWithPaceString: tfPace.text];
+    RCSpeed *rs = [[RCSpeed alloc] initWithPaceString: bPace.text];
     if (calcVar) {
-        RCDistance *rd = [[RCDistance alloc] initWithString: tfDistance.text];
+        RCDistance *rd = [[RCDistance alloc] initWithString: bDistance.text];
         runCalcModel = [[RunCalcModel alloc] initWithDistance: rd andSpeed: rs];
-        tfDuration.text = [runCalcModel.duration stringValue];
+        [bDuration setTextWithoutValueChangedEvent: [runCalcModel.duration stringValue]];
     }
     else {
-        RCTimeInterval *rt = [[RCTimeInterval alloc] initWithString:tfDuration.text];
+        RCTimeInterval *rt = [[RCTimeInterval alloc] initWithString:bDuration.text];
         runCalcModel = [[RunCalcModel alloc] initWithSpeed:rs andDuration:rt];
-        tfDistance.text = [runCalcModel.distance stringValue];
+        [bDistance setTextWithoutValueChangedEvent: [runCalcModel.distance stringValue]];
     }
-    tfSpeed.text = [rs stringValue];
-    tfDuration.text = [runCalcModel.duration stringValue];
+    [bSpeed setTextWithoutValueChangedEvent: [rs stringValue]];
+    [bDuration setTextWithoutValueChangedEvent: [runCalcModel.duration stringValue]];
     [self updateRuns];
 }
 
 - (void) distanceChanged {
 	// Get distance
-    RCDistance *rd = [[RCDistance alloc] initWithString:tfDistance.text];
+    RCDistance *rd = [[RCDistance alloc] initWithString:bDistance.text];
     if (calcVar == DURATION) {
-        RCSpeed *rs = [[RCSpeed alloc] initWithString: tfSpeed.text];
+        RCSpeed *rs = [[RCSpeed alloc] initWithString: bSpeed.text];
         runCalcModel = [[RunCalcModel alloc] initWithDistance:rd andSpeed:rs];
-        tfDuration.text = [runCalcModel.duration stringValue];
+        [bDuration setTextWithoutValueChangedEvent: [runCalcModel.duration stringValue]];
     }
     else {
-        RCTimeInterval *rt = [[RCTimeInterval alloc] initWithString:tfDuration.text];
+        RCTimeInterval *rt = [[RCTimeInterval alloc] initWithString:bDuration.text];
         runCalcModel = [[RunCalcModel alloc] initWithDuration:rt andDistance:rd];
-        tfSpeed.text = [runCalcModel.speed stringValue];
-        tfPace.text = [runCalcModel.speed stringValueForPace];
+        [bSpeed setTextWithoutValueChangedEvent: [runCalcModel.speed stringValue]];
+        [bPace setTextWithoutValueChangedEvent: [runCalcModel.speed stringValueForPace]];
         [self updateRuns];
     }
 }
@@ -268,17 +268,17 @@ enum RCParameter {SPEED=1, DURATION=2, DISTANCE=3} calcVar;
 
 - (void) durationChanged {
 	//Get Duration and speed
-    RCTimeInterval *rt = [[RCTimeInterval alloc] initWithString:tfDuration.text];
+    RCTimeInterval *rt = [[RCTimeInterval alloc] initWithString:bDuration.text];
     if (calcVar == DISTANCE) {
-        RCSpeed *rs = [[RCSpeed alloc] initWithString: tfSpeed.text];
+        RCSpeed *rs = [[RCSpeed alloc] initWithString: bSpeed.text];
         runCalcModel = [[RunCalcModel alloc] initWithSpeed:rs andDuration:rt];
-        tfDistance.text = [runCalcModel.distance stringValue];
+        [bDistance setTextWithoutValueChangedEvent: [runCalcModel.distance stringValue]];
     }
     else {
-        RCDistance *rd = [[RCDistance alloc] initWithString:tfDistance  .text];
+        RCDistance *rd = [[RCDistance alloc] initWithString: bDistance.text];
         runCalcModel = [[RunCalcModel alloc] initWithDuration:rt andDistance:rd];
-        tfSpeed.text = [runCalcModel.speed stringValue];
-        tfPace.text = [runCalcModel.speed stringValueForPace];
+        [bSpeed setTextWithoutValueChangedEvent: [runCalcModel.speed stringValue]];
+        [bPace setTextWithoutValueChangedEvent: [runCalcModel.speed stringValueForPace]];
         [self updateRuns];
     }
 }
@@ -286,16 +286,16 @@ enum RCParameter {SPEED=1, DURATION=2, DISTANCE=3} calcVar;
 
 #pragma mark - IBAction methods
 - (IBAction) convert: (id)sender {
-	if (sender == tfSpeed) {
+	if (sender == bSpeed) {
 		[self speedChanged];
 	}
-    else if (sender == tfPace) {
+    else if (sender == bPace) {
         [self paceChanged];
     }
-	else if (sender == tfDistance) {
+	else if (sender == bDistance) {
 		[self distanceChanged];
 	}
-	else if (sender == tfDuration) {
+	else if (sender == bDuration) {
 		[self durationChanged];
 	}
 	else {
@@ -338,16 +338,16 @@ enum RCParameter {SPEED=1, DURATION=2, DISTANCE=3} calcVar;
         default:
             break;
     }
-    tfSpeed.text = [runCalcModel.speed stringValue];
-    tfPace.text = [runCalcModel.speed stringValueForPace];
-    tfDistance.text = [runCalcModel.distance stringValue];
+    [bSpeed setTextWithoutValueChangedEvent: [runCalcModel.speed stringValue]];
+    [bPace setTextWithoutValueChangedEvent: [runCalcModel.speed stringValueForPace]];
+    [bDistance setTextWithoutValueChangedEvent: [runCalcModel.distance stringValue]];
 }
 	
 - (IBAction)backgroundTouched:(id)sender {
-    [tfDistance resignFirstResponder];
-    [tfDuration resignFirstResponder];
-    [tfPace resignFirstResponder];
-    [tfSpeed resignFirstResponder];
+    [bDistance resignFirstResponder];
+    [bDuration resignFirstResponder];
+    [bPace resignFirstResponder];
+    [bSpeed resignFirstResponder];
 }
 
 -(IBAction)handlePan:(UIPanGestureRecognizer *)recognizer {
@@ -400,22 +400,26 @@ enum RCParameter {SPEED=1, DURATION=2, DISTANCE=3} calcVar;
 }
 
 - (IBAction)beginEdit:(id)sender {
-    if (sender == tfDistance) {
+    if (sender == bDistance) {
         viNumericKeyboard.nbDigits = 3;
-        viNumericKeyboard.delegate = sender;
-        [viNumericKeyboard setKeyboardValue:((UITextField *)sender).text];
+        viNumericKeyboard.delegate1 = sender;
+        viNumericKeyboard.delegate = nil;
+        [viNumericKeyboard setKeyboardValue:((CAEditButton *)sender).text];
     }
-    else if (sender == tfDuration) {
-        viDurationKeyboard.delegate = sender;
-        [viDurationKeyboard setKeyboardValue:((UITextField *)sender).text];
+    else if (sender == bDuration) {
+        viDurationKeyboard.delegate1 = sender;
+        viDurationKeyboard.delegate = nil;
+        [viDurationKeyboard setKeyboardValue:((CAEditButton *)sender).text];
     }
-    else if (sender == tfSpeed) {
+    else if (sender == bSpeed) {
             viNumericKeyboard.nbDigits = 2;
-        viNumericKeyboard.delegate = sender;
+        viNumericKeyboard.delegate = nil;
+        viNumericKeyboard.delegate1 = sender;
         [viNumericKeyboard setKeyboardValue:((UITextField *)sender).text];
     }
     else { // tfPace
-        viDurationKeyboard.delegate = sender;
+        viDurationKeyboard.delegate1 = sender;
+        viDurationKeyboard.delegate = nil;
         [viDurationKeyboard setKeyboardValue:((UITextField *)sender).text];
     }
     // Register the active control (used to resign first responder)
@@ -435,40 +439,40 @@ enum RCParameter {SPEED=1, DURATION=2, DISTANCE=3} calcVar;
     UIColor *colorGreen = [[UIColor alloc] initWithRed:94.0/255.0 green:217.0/255.0 blue:78.0/255.0 alpha:1.0];
     if (sender == SPEED) {
         calcVar = SPEED;
-        tfSpeed.enabled = NO;
-        tfPace.enabled = NO;
+        bSpeed.enabled = NO;
+        bPace.enabled = NO;
         pgrSpeed.enabled = NO;
-        tfSpeed.textColor = colorOrange;
-        tfPace.textColor = colorOrange;
+        [bSpeed setTitleColor:colorOrange forState:UIControlStateNormal];
+        [bPace setTitleColor:colorOrange forState:UIControlStateNormal];
     }
     else {
-        tfSpeed.enabled = YES;
-        tfPace.enabled = YES;
+        bSpeed.enabled = YES;
+        bPace.enabled = YES;
         pgrSpeed.enabled = YES;
-        tfSpeed.textColor = colorGreen;
-        tfPace.textColor = colorGreen;
+        [bSpeed setTitleColor:colorGreen forState:UIControlStateNormal];
+        [bPace setTitleColor:colorGreen forState:UIControlStateNormal];
     }    
     if (sender == DISTANCE) {
         calcVar = DISTANCE;
-        tfDistance.enabled = NO;
+        bDistance.enabled = NO;
         pgrDistance.enabled = NO;
-        tfDistance.textColor = colorOrange;
+        [bDistance setTitleColor:colorOrange forState:UIControlStateNormal];
     }
     else {
-        tfDistance.enabled = YES;
+        bDistance.enabled = YES;
         pgrDistance.enabled = YES;
-        tfDistance.textColor = colorGreen;
+        [bDistance setTitleColor:colorGreen forState:UIControlStateNormal];
     }
     if (sender == DURATION) {
         calcVar = DURATION;
-        tfDuration.enabled = NO;
+        bDuration.enabled = NO;
         pgrDuration.enabled = NO;
-        tfDuration.textColor = colorOrange;
+        [bDuration setTitleColor: colorOrange forState:UIControlStateNormal];
     }
     else {
-        tfDuration.enabled = YES;
+        bDuration.enabled = YES;
         pgrDuration.enabled = YES;
-        tfDuration.textColor = colorGreen;
+        [bDuration setTitleColor: colorGreen forState:UIControlStateNormal];
     }
 }
 

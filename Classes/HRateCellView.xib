@@ -141,7 +141,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<reference key="IBUIContentView" ref="986146393"/>
 				<string key="IBUIReuseIdentifier">HRCell</string>
-				<real value="40" key="IBUIRowHeight"/>
+				<real value="44" key="IBUIRowHeight"/>
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -222,6 +222,14 @@
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
+					<string key="className">CAEditButton</string>
+					<string key="superclassName">UIButton</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/CAEditButton.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">KarvonenHRateViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
@@ -244,23 +252,33 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="bMaxRate">CAEditButton</string>
+						<string key="bRestRate">CAEditButton</string>
+						<string key="lblInputMaxRate">UILabel</string>
+						<string key="lblInputRestRate">UILabel</string>
 						<string key="tcHRate">UITableViewCell</string>
-						<string key="tfMaxRate">UITextField</string>
-						<string key="tfRestRate">UITextField</string>
 						<string key="tvRates">UITableView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="bMaxRate">
+							<string key="name">bMaxRate</string>
+							<string key="candidateClassName">CAEditButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="bRestRate">
+							<string key="name">bRestRate</string>
+							<string key="candidateClassName">CAEditButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lblInputMaxRate">
+							<string key="name">lblInputMaxRate</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lblInputRestRate">
+							<string key="name">lblInputRestRate</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="tcHRate">
 							<string key="name">tcHRate</string>
 							<string key="candidateClassName">UITableViewCell</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="tfMaxRate">
-							<string key="name">tfMaxRate</string>
-							<string key="candidateClassName">UITextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="tfRestRate">
-							<string key="name">tfRestRate</string>
-							<string key="candidateClassName">UITextField</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="tvRates">
 							<string key="name">tvRates</string>

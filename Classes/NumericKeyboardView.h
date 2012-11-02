@@ -7,15 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CAEditableItem.h"
 
-@interface NumericKeyboardView : UIView <UIPickerViewDelegate, UIPickerViewDataSource>  {
-    id <UITextInput> __unsafe_unretained delegate;
+@interface NumericKeyboardView : UIView <UIPickerViewDelegate, UIPickerViewDataSource> {
     int nbDigits;
     int nbFrac;
-    bool leadingZeros;
 }
 
 @property (nonatomic, unsafe_unretained) id <UITextInput> delegate;
+@property (nonatomic, unsafe_unretained) id <CAEditableItem> delegate1;
 @property (nonatomic, assign) bool leadingZeros;
 @property (nonatomic, assign) int nbDigits;
 @property (nonatomic, assign) int nbFrac;

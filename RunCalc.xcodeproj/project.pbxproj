@@ -50,6 +50,15 @@
 		AA94809115ADA1C00067B36B /* RunCalcViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA94809015ADA1C00067B36B /* RunCalcViewController.xib */; };
 		AAC3531B161DD849005A95CA /* KeyboardAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC35319161DD848005A95CA /* KeyboardAccessoryView.m */; };
 		AAC3531C161DD849005A95CA /* KeyboardAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAC3531A161DD849005A95CA /* KeyboardAccessoryView.xib */; };
+		AADA6AC516331211007813F3 /* CAEditButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AADA6AC416331211007813F3 /* CAEditButton.m */; };
+		AAE78A87164261A8002E0889 /* IconAppli.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE78A7F164261A8002E0889 /* IconAppli.png */; };
+		AAE78A88164261A8002E0889 /* IconAppli@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE78A80164261A8002E0889 /* IconAppli@2x.png */; };
+		AAE78A96164298C5002E0889 /* IconCompteur.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE78A94164298C5002E0889 /* IconCompteur.png */; };
+		AAE78A97164298C5002E0889 /* IconCompteur@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE78A95164298C5002E0889 /* IconCompteur@2x.png */; };
+		AAE78AA11642A530002E0889 /* IconHeart.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE78A9D1642A530002E0889 /* IconHeart.png */; };
+		AAE78AA21642A530002E0889 /* IconHeart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE78A9E1642A530002E0889 /* IconHeart@2x.png */; };
+		AAE78AA31642A530002E0889 /* IconRuler.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE78A9F1642A530002E0889 /* IconRuler.png */; };
+		AAE78AA41642A530002E0889 /* IconRuler@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE78AA01642A530002E0889 /* IconRuler@2x.png */; };
 		AAFA7D4B16231996000DDE4F /* RunCalc-Cell44.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFA7D4916231996000DDE4F /* RunCalc-Cell44.png */; };
 		AAFA7D4C16231996000DDE4F /* RunCalc-Cell44@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFA7D4A16231996000DDE4F /* RunCalc-Cell44@2x.png */; };
 		AAFA7D50162329FD000DDE4F /* CustomColoredAccessory.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFA7D4F162329FD000DDE4F /* CustomColoredAccessory.m */; };
@@ -141,10 +150,21 @@
 		AA1C8343161B45D000F4F0DA /* RunCalc-BgAccessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-BgAccessory@2x.png"; sourceTree = "<group>"; };
 		AA1C8344161B45D000F4F0DA /* RunCalc-ButtonAccessory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-ButtonAccessory.png"; sourceTree = "<group>"; };
 		AA1C8345161B45D000F4F0DA /* RunCalc-ButtonAccessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-ButtonAccessory@2x.png"; sourceTree = "<group>"; };
+		AA1F41FD16343B6F00C473F9 /* CAEditableItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CAEditableItem.h; sourceTree = "<group>"; };
 		AA94809015ADA1C00067B36B /* RunCalcViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RunCalcViewController.xib; sourceTree = "<group>"; };
 		AAC35318161DD6A2005A95CA /* KeyboardAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardAccessoryView.h; sourceTree = "<group>"; };
 		AAC35319161DD848005A95CA /* KeyboardAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardAccessoryView.m; sourceTree = "<group>"; };
 		AAC3531A161DD849005A95CA /* KeyboardAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardAccessoryView.xib; sourceTree = "<group>"; };
+		AADA6AC316331210007813F3 /* CAEditButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAEditButton.h; sourceTree = "<group>"; };
+		AADA6AC416331211007813F3 /* CAEditButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAEditButton.m; sourceTree = "<group>"; };
+		AAE78A7F164261A8002E0889 /* IconAppli.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconAppli.png; sourceTree = "<group>"; };
+		AAE78A80164261A8002E0889 /* IconAppli@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IconAppli@2x.png"; sourceTree = "<group>"; };
+		AAE78A94164298C5002E0889 /* IconCompteur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconCompteur.png; sourceTree = "<group>"; };
+		AAE78A95164298C5002E0889 /* IconCompteur@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IconCompteur@2x.png"; sourceTree = "<group>"; };
+		AAE78A9D1642A530002E0889 /* IconHeart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconHeart.png; sourceTree = "<group>"; };
+		AAE78A9E1642A530002E0889 /* IconHeart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IconHeart@2x.png"; sourceTree = "<group>"; };
+		AAE78A9F1642A530002E0889 /* IconRuler.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconRuler.png; sourceTree = "<group>"; };
+		AAE78AA01642A530002E0889 /* IconRuler@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IconRuler@2x.png"; sourceTree = "<group>"; };
 		AAFA7D4916231996000DDE4F /* RunCalc-Cell44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-Cell44.png"; sourceTree = "<group>"; };
 		AAFA7D4A16231996000DDE4F /* RunCalc-Cell44@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-Cell44@2x.png"; sourceTree = "<group>"; };
 		AAFA7D4E162329FD000DDE4F /* CustomColoredAccessory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomColoredAccessory.h; sourceTree = "<group>"; };
@@ -237,6 +257,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AAE78A7D16426164002E0889 /* Icons */,
 				AAFF5E7C15FE39690078BE91 /* Pictures */,
 				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* RunCalc-Info.plist */,
@@ -366,11 +387,29 @@
 			name = Keyboards;
 			sourceTree = "<group>";
 		};
+		AAE78A7D16426164002E0889 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				AAE78A9D1642A530002E0889 /* IconHeart.png */,
+				AAE78A9E1642A530002E0889 /* IconHeart@2x.png */,
+				AAE78A9F1642A530002E0889 /* IconRuler.png */,
+				AAE78AA01642A530002E0889 /* IconRuler@2x.png */,
+				AAE78A94164298C5002E0889 /* IconCompteur.png */,
+				AAE78A95164298C5002E0889 /* IconCompteur@2x.png */,
+				AAE78A7F164261A8002E0889 /* IconAppli.png */,
+				AAE78A80164261A8002E0889 /* IconAppli@2x.png */,
+			);
+			name = Icons;
+			sourceTree = "<group>";
+		};
 		AAFA7D4D162329AB000DDE4F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				AAFA7D4E162329FD000DDE4F /* CustomColoredAccessory.h */,
 				AAFA7D4F162329FD000DDE4F /* CustomColoredAccessory.m */,
+				AA1F41FD16343B6F00C473F9 /* CAEditableItem.h */,
+				AADA6AC316331210007813F3 /* CAEditButton.h */,
+				AADA6AC416331211007813F3 /* CAEditButton.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -530,6 +569,14 @@
 				AAFA7D6616257EA1000DDE4F /* RunCalc-CadreTF@2x.png in Resources */,
 				AAFA7D6716257EA1000DDE4F /* RunCalc-CadreTFSelected.png in Resources */,
 				AAFA7D6816257EA1000DDE4F /* RunCalc-CadreTFSelected@2x.png in Resources */,
+				AAE78A87164261A8002E0889 /* IconAppli.png in Resources */,
+				AAE78A88164261A8002E0889 /* IconAppli@2x.png in Resources */,
+				AAE78A96164298C5002E0889 /* IconCompteur.png in Resources */,
+				AAE78A97164298C5002E0889 /* IconCompteur@2x.png in Resources */,
+				AAE78AA11642A530002E0889 /* IconHeart.png in Resources */,
+				AAE78AA21642A530002E0889 /* IconHeart@2x.png in Resources */,
+				AAE78AA31642A530002E0889 /* IconRuler.png in Resources */,
+				AAE78AA41642A530002E0889 /* IconRuler@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,6 +608,7 @@
 				458207101577A8D000C4C54F /* KarvonenHRateFromAgeViewController.m in Sources */,
 				AAC3531B161DD849005A95CA /* KeyboardAccessoryView.m in Sources */,
 				AAFA7D50162329FD000DDE4F /* CustomColoredAccessory.m in Sources */,
+				AADA6AC516331211007813F3 /* CAEditButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

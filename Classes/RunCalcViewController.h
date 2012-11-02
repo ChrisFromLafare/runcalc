@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CAEditButton.h"
 #import "RunCalcModel.h"
 #import "NumericKeyboardView.h"
 #import "DurationKeyboardView.h"
@@ -14,38 +15,38 @@
 
 
 @interface RunCalcViewController : UIViewController <UITextFieldDelegate, UIGestureRecognizerDelegate> {
-    RunCalcModel *runCalcModel;
-    UIScrollView *scrollView;
-	UITextField *tfSpeed;
-	UITextField *tfDistance;
-	UITextField *tfDuration;
-    UITextField *tfPace;
-    UILabel *lblHalfMarathon;
-    UILabel *lblMarathon;
-    UILabel *lblSpeedUnit;
-    UILabel *lblPaceUnit;
-    UILabel *lblDistanceUnit;
-    UILabel *lblSpeedUnit1;
-    UILabel *lblPaceUnit1;
-    UILabel *lblDistanceUnit1;
-    UISegmentedControl *scUnit;
-    UIImageView *ivButtonSpeed;
-    UIImageView *ivButtonDistance;
-    UIImageView *ivButtonDuration;
-    UIGestureRecognizer *pgrSpeed;
-    UIGestureRecognizer *pgrDistance;
-    UIGestureRecognizer *pgrDuration;
-    NumericKeyboardView *viNumericKeyboard;
-    DurationKeyboardView *viDurationKeyboard;
-    KeyboardAccessoryView *viKeyboardAccessory;
+//    RunCalcModel *runCalcModel;
+//    UIScrollView *scrollView;
+////	UITextField *tfSpeed;
+////	UITextField *tfDistance;
+////	CAEditButton *bDuration;
+////    UITextField *tfPace;
+//    UILabel *lblHalfMarathon;
+//    UILabel *lblMarathon;
+//    UILabel *lblSpeedUnit;
+//    UILabel *lblPaceUnit;
+//    UILabel *lblDistanceUnit;
+//    UILabel *lblSpeedUnit1;
+//    UILabel *lblPaceUnit1;
+//    UILabel *lblDistanceUnit1;
+//    UISegmentedControl *scUnit;
+//    UIImageView *ivButtonSpeed;
+//    UIImageView *ivButtonDistance;
+//    UIImageView *ivButtonDuration;
+//    UIGestureRecognizer *pgrSpeed;
+//    UIGestureRecognizer *pgrDistance;
+//    UIGestureRecognizer *pgrDuration;
+//    NumericKeyboardView *viNumericKeyboard;
+//    DurationKeyboardView *viDurationKeyboard;
+//    KeyboardAccessoryView *viKeyboardAccessory;
 }
 
 @property (nonatomic) RunCalcModel *runCalcModel;
 @property (nonatomic) IBOutlet UIScrollView *scrollView;
-@property (nonatomic) IBOutlet UITextField *tfSpeed;
-@property (nonatomic) IBOutlet UITextField *tfDistance;
-@property (nonatomic) IBOutlet UITextField *tfDuration;
-@property (nonatomic) IBOutlet UITextField *tfPace;
+@property (nonatomic) IBOutlet CAEditButton *bSpeed;
+@property (nonatomic) IBOutlet CAEditButton *bDistance;
+@property (nonatomic) IBOutlet CAEditButton *bDuration;
+@property (nonatomic) IBOutlet CAEditButton *bPace;
 @property (nonatomic) IBOutlet UILabel *lblHalfMarathon;
 @property (nonatomic) IBOutlet UILabel *lblMarathon;
 @property (nonatomic) IBOutlet UILabel *lblSpeedUnit;

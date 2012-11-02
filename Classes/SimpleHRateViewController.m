@@ -16,7 +16,7 @@
 
 @implementation SimpleHRateViewController
 
-@synthesize tfMaxRate, rates;
+@synthesize bMaxHR, rates;
 @synthesize tcHRate, tvRates;
 @synthesize viNumericKeyboard;
 @synthesize uivHRM;
@@ -33,16 +33,15 @@
     viNumericKeyboard.leadingZeros = YES;
     viNumericKeyboard.nbDigits=3;
     viNumericKeyboard.nbFrac=0;
-    self.tfMaxRate.inputView = self.viNumericKeyboard;
-    viNumericKeyboard.delegate = tfMaxRate;
+    self.bMaxHR.inputView = self.viNumericKeyboard;
+    viNumericKeyboard.delegate1 = bMaxHR;
     views = [[NSBundle mainBundle] loadNibNamed:@"KeyboardAccessoryView" owner:self options:nil];
-    self.tfMaxRate.inputAccessoryView = (KeyboardAccessoryView *)[views objectAtIndex:0];
+    self.bMaxHR.inputAccessoryView = (KeyboardAccessoryView *)[views objectAtIndex:0];
 
 }
 
 - (void)viewDidUnload
 {
-    self.tfMaxRate = nil;
     self.tvRates = nil;
     self.tcHRate = nil;
     self.rates = nil;
@@ -167,7 +166,7 @@
 
 - (void)calcFrequencies:(id)sender {
     RCHeartRate *heartRate;
-    int maxRate = [tfMaxRate.text intValue];
+    int maxRate = [bMaxHR.text intValue];
     if (maxRate != 0) {
         heartRate = [[RCHeartRate alloc] initWithMaxRate:maxRate];
     }
@@ -184,7 +183,33 @@
 }
 
 - (void)backgroundTouched:(id)sender {
-    [tfMaxRate resignFirstResponder];
+    [bMaxHR resignFirstResponder];
     [self calcFrequencies:sender];
 }
+
+#pragma mark -
+#pragma mark keyboard management
+
+-(void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillDisappear:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+-(void) viewDidDisappeared:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void) keyboardWillDisappear: (NSNotification *)aNotification {
+    int maxRate = [bMaxHR.text intValue];
+    if (maxRate > 220) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Are you sure?" message: @"Your max heart rate looks quite high!!!\nYou may want to review it." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];
+    }
+    if (maxRate < 130) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Are you sure?" message: @"Your max heart rate looks quite low!!!\nYou may want to review it." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];
+    }
+}
+
 @end

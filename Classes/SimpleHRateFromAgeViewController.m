@@ -18,7 +18,7 @@
 
 @implementation SimpleHRateFromAgeViewController
 
-@synthesize tfAge, scSex, rates;
+@synthesize bAge, scSex, rates;
 @synthesize tcHRate, tvRates;
 @synthesize viNumericKeyboard;
 @synthesize uivAge;
@@ -34,10 +34,10 @@
     viNumericKeyboard.leadingZeros = YES;
     viNumericKeyboard.nbDigits = 2;
     viNumericKeyboard.nbFrac = 0;
-    self.tfAge.inputView = self.viNumericKeyboard;
-    viNumericKeyboard.delegate = tfAge;
+    self.bAge.inputView = self.viNumericKeyboard;
+    viNumericKeyboard.delegate1 = bAge;
     views = [[NSBundle mainBundle] loadNibNamed:@"KeyboardAccessoryView" owner:self options:nil];
-    self.tfAge.inputAccessoryView = (KeyboardAccessoryView *)[views objectAtIndex:0];
+    self.bAge.inputAccessoryView = (KeyboardAccessoryView *)[views objectAtIndex:0];
     self.navigationItem.title = @"HR%(Sex, Age)";
     // Add segmented button to navigation controller
     scSex = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"M", @"F", nil]];
@@ -50,7 +50,6 @@
 
 - (void)viewDidUnload
 {
-    self.tfAge = nil;
     self.scSex = nil;
     self.tvRates = nil;
     self.tcHRate = nil;
@@ -88,7 +87,7 @@
     }
 }
     
-    - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     static NSString *CellIdentifier = @"HRCell";
@@ -124,57 +123,11 @@
 -(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     cell.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"RunCalc-Cell44.png"]];
 }
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
 }
 
 #pragma mark -
@@ -195,7 +148,7 @@
 - (void)calcFrequencies:(id)sender {
     RCHeartRate *heartRate;
     t_sex sex = ([scSex selectedSegmentIndex] == 0)? MALE : FEMALE;
-    int age = [tfAge.text intValue];
+    int age = [bAge.text intValue];
     if (age != 0) {
         heartRate = [[RCHeartRate alloc] initWithSex:sex andAge:age];
         NSMutableArray  *tempRates = [[NSMutableArray alloc] initWithCapacity:10];
@@ -213,7 +166,34 @@
 
 - (void)backgroundTouched:(id)sender {
     self.uivAge.highlighted = NO;
-    [tfAge resignFirstResponder];
+    [bAge resignFirstResponder];
     [self calcFrequencies:sender];
 }
+
+#pragma mark -
+#pragma mark keyboard management
+
+-(void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillDisappear:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+-(void) viewDidDisappeared:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void) keyboardWillDisappear: (NSNotification *)aNotification {
+    int age = [bAge.text intValue];
+    if (age > 80) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Are you sure?" message: @"Are you so old?\nThe estimated heart rates could be unaccurate!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];
+    }
+    else if (age < 15)  {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Are you sure?" message: @"Are you so young?\nThe estimated heart rates could be unaccurate!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];        
+    }
+          
+}
+
 @end

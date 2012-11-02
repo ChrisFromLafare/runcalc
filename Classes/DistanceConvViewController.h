@@ -7,18 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CAEditButton.h"
 #import "NumericKeyboardView.h"
 #import "DurationKeyboardView.h"
 
 @interface DistanceConvViewController : UIViewController <UITextFieldDelegate> {
-    UITextField *tfKm;
-    UITextField *tfMiles;
-    NumericKeyboardView *viNumericKeyboard;
-    DurationKeyboardView *viDurationKeyboard;
 }
 
-@property (nonatomic) IBOutlet UITextField *tfKm;
-@property (nonatomic) IBOutlet UITextField *tfMiles;
+@property (nonatomic) IBOutlet CAEditButton *bKm;
+@property (nonatomic) IBOutlet CAEditButton *bMiles;
 @property (nonatomic) IBOutlet NumericKeyboardView *viNumericKeyboard;
 @property (nonatomic) IBOutlet DurationKeyboardView *viDurationKeyboard;
 

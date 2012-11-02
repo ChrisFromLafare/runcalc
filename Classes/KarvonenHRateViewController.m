@@ -8,6 +8,7 @@
 
 #import "KarvonenHRateViewController.h"
 #import "RCHeartRate.h"
+#import "KeyboardAccessoryView.h"
 
 @interface KarvonenHRateViewController ()
 
@@ -15,13 +16,15 @@
 
 @implementation KarvonenHRateViewController
 
-@synthesize tfMaxRate, tfRestRate, rates;
+@synthesize rates;
 @synthesize tcHRate, tvRates;
+@synthesize bMaxRate, bRestRate;
 @synthesize viNumericKeyboard;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"RunCalc-Bg2.png"]];
     // Do any additional setup after loading the view.
     // load the keyboard
     NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"NumericKeyboardView" owner:self options:nil];
@@ -29,9 +32,11 @@
     viNumericKeyboard.leadingZeros = YES;
     viNumericKeyboard.nbDigits=3;
     viNumericKeyboard.nbFrac=0;
-    self.tfMaxRate.inputView = self.viNumericKeyboard;
-    self.tfRestRate.inputView = self.viNumericKeyboard;
-
+    self.bMaxRate.inputView = self.viNumericKeyboard;
+    self.bRestRate.inputView = self.viNumericKeyboard;
+    views = [[NSBundle mainBundle] loadNibNamed:@"KeyboardAccessoryView" owner:self options:nil];
+    self.bMaxRate.inputAccessoryView = (KeyboardAccessoryView *)[views objectAtIndex:0];
+    self.bRestRate.inputAccessoryView = (KeyboardAccessoryView *)[views objectAtIndex:0];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -42,8 +47,6 @@
 
 - (void)viewDidUnload
 {
-    self.tfMaxRate = nil;
-    self.tfRestRate = nil;
     self.tvRates = nil;
     self.tcHRate = nil;
     self.rates = nil;
@@ -105,6 +108,10 @@
     return cell;
 }
 
+-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"RunCalc-Cell44.png"]];
+}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -162,14 +169,16 @@
 #pragma mark Actions implementation
 
 - (void)beginEditing:(id)sender {
-    viNumericKeyboard.delegate = sender;
-    [viNumericKeyboard setKeyboardValue:((UITextField *)sender).text];
+    CAEditButton *s= (CAEditButton *)sender;
+    viNumericKeyboard.delegate1 = s;
+    ((KeyboardAccessoryView*) s.inputAccessoryView).activeControl = s;
+    [viNumericKeyboard setKeyboardValue:s.text];
 }
 
 - (void)calcFrequencies:(id)sender {
     RCHeartRate *heartRate;
-    int maxRate = [tfMaxRate.text intValue];
-    int restRate = [tfRestRate.text intValue];
+    int maxRate = [bMaxRate.titleLabel.text intValue];
+    int restRate = [bRestRate.titleLabel.text intValue];
     if ((maxRate != 0) && (restRate != 0)) {
         heartRate = [[RCHeartRate alloc] initWithMaxRate:maxRate];
         heartRate.restRate = restRate;
@@ -187,8 +196,46 @@
 }
 
 - (void)backgroundTouched:(id)sender {
-    [tfMaxRate resignFirstResponder];
-    [tfRestRate resignFirstResponder];
+    [bMaxRate resignFirstResponder];
+    [bRestRate resignFirstResponder];
     [self calcFrequencies:sender];
 }
+#pragma mark -
+#pragma mark keyboard management
+
+-(void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillDisappear:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+-(void) viewDidDisappeared:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void) keyboardWillDisappear: (NSNotification *)aNotification {
+    int maxHRate = [bMaxRate.text intValue];
+    if (maxHRate > 220) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Are you sure?" message: @"Your max heart rate looks quite high!!!\nYou may want to review it." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];
+    }
+    if (maxHRate < 130) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Are you sure?" message: @"Your max heart rate looks quite low!!!\nYou may want to review it." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];
+    }
+    int restHR = [bRestRate.text intValue];
+    if (restHR > 80) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Are you sure?" message: @"Your rest heart rate looks very high\nYou should visit a doctor" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];
+    }
+    else if (restHR < 30)  {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Are you sure?" message: @"Your rest heart rate looks very low\nYou must be a champion!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];        
+    }
+    if (restHR > maxHRate) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message: @"Rest heart rate can't be higher than Max heart rate\nPlease review the inputs" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];                
+    }
+}   
+
 @end

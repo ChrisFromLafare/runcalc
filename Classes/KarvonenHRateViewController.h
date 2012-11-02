@@ -7,22 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CAEditButton.h"
 #import "HRateCellView.h"
 #import "NumericKeyboardView.h"
 
 @interface KarvonenHRateViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
-    UITextField *tfMaxRate;
-    UITextField *tfRestRate;
     UITableView *tvRates;
     UITableViewCell *tcHRRate;
+    CAEditButton *bMaxRate;
+    CAEditButton *bRestRate;
     NSArray *rates;
     NumericKeyboardView *viNumericKeyboard;
 }
 
-@property (nonatomic) IBOutlet UITextField *tfMaxRate;
-@property (nonatomic) IBOutlet UITextField *tfRestRate;
 @property (nonatomic) IBOutlet UITableView *tvRates;
 @property (nonatomic) IBOutlet UITableViewCell *tcHRate;
+@property (nonatomic) IBOutlet CAEditButton *bMaxRate;
+@property (nonatomic) IBOutlet CAEditButton *bRestRate;
 @property (nonatomic) NSArray *rates;
 @property (nonatomic) NumericKeyboardView *viNumericKeyboard;
 

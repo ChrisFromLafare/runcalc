@@ -7,23 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CAEditButton.h"
 #import "NumericKeyboardView.h"
 #import "DurationKeyboardView.h"
 
 @interface SpeedConvViewController : UIViewController <UITextFieldDelegate> {
-    UITextField *tfKmH;
-    UITextField *tfMiH;
-    UITextField *tfMnKm;
-    UITextField *tfMnMi;
-    NumericKeyboardView *viNumericKeyboard;
-    DurationKeyboardView *viDurationKeyboard;
 }
 
 @property (nonatomic) IBOutlet UIScrollView *scrollView;
-@property (nonatomic) IBOutlet UITextField *tfMnKm;
-@property (nonatomic) IBOutlet UITextField *tfMnMi;
-@property (nonatomic) IBOutlet UITextField *tfKmH;
-@property (nonatomic) IBOutlet UITextField *tfMiH;
+@property (nonatomic) IBOutlet CAEditButton *bMnKm;
+@property (nonatomic) IBOutlet CAEditButton *bMnMi;
+@property (nonatomic) IBOutlet CAEditButton *bKmH;
+@property (nonatomic) IBOutlet CAEditButton *bMiH;
 @property (nonatomic) NumericKeyboardView *viNumericKeyboard;
 @property (nonatomic) DurationKeyboardView *viDurationKeyboard;
 

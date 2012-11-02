@@ -14,10 +14,6 @@
 
 @interface SpeedConvViewController ()
 
-@property (nonatomic) IBOutlet UIImageView *uivKm;
-@property (nonatomic) IBOutlet UIImageView *uivMi;
-@property (nonatomic) IBOutlet UIImageView *uivMnKm;
-@property (nonatomic) IBOutlet UIImageView *uivMnM;
 @property (nonatomic) KeyboardAccessoryView *kav;
 @property (nonatomic) BOOL keyboardShown;
 @property (nonatomic) CGFloat heightCoveredByKeyboard;
@@ -26,9 +22,8 @@
 
 @implementation SpeedConvViewController
 
-@synthesize tfKmH, tfMiH, tfMnKm, tfMnMi;
+@synthesize bKmH, bMiH, bMnKm, bMnMi;
 @synthesize viNumericKeyboard, viDurationKeyboard;
-@synthesize uivKm, uivMi, uivMnKm, uivMnM;
 @synthesize kav;
 @synthesize scrollView;
 @synthesize keyboardShown, heightCoveredByKeyboard;
@@ -54,28 +49,28 @@
     viNumericKeyboard.leadingZeros = YES;
     viNumericKeyboard.nbDigits=2;
     viNumericKeyboard.nbFrac=2;
-    self.tfKmH.inputView = self.viNumericKeyboard;
-    self.tfMiH.inputView = self.viNumericKeyboard; 
+    self.bKmH.inputView = self.viNumericKeyboard;
+    self.bMiH.inputView = self.viNumericKeyboard; 
     views = [[NSBundle mainBundle] loadNibNamed:@"DurationKeyboardView" owner:self options:nil];
     self.viDurationKeyboard = (DurationKeyboardView *)[views objectAtIndex:0];
-    self.tfMnKm.inputView = self.viDurationKeyboard;
-    self.tfMnMi.inputView = self.viDurationKeyboard;
+    self.bMnKm.inputView = self.viDurationKeyboard;
+    self.bMnMi.inputView = self.viDurationKeyboard;
     views = [[NSBundle mainBundle] loadNibNamed:@"KeyboardAccessoryView" owner:self options:nil];  
     kav = (KeyboardAccessoryView *)[views objectAtIndex:0];
-    self.tfKmH.inputAccessoryView = kav;
-    self.tfMiH.inputAccessoryView = kav;
-    self.tfMnKm.inputAccessoryView = kav;
-    self.tfMnMi.inputAccessoryView = kav;
+    self.bKmH.inputAccessoryView = kav;
+    self.bMiH.inputAccessoryView = kav;
+    self.bMnKm.inputAccessoryView = kav;
+    self.bMnMi.inputAccessoryView = kav;
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-    self.tfKmH = nil;
-    self.tfMiH = nil;
-    self.tfMnKm = nil;
-    self.tfMnMi = nil;
+    self.bKmH = nil;
+    self.bMiH = nil;
+    self.bMnKm = nil;
+    self.bMnMi = nil;
     self.viNumericKeyboard = nil;
 }
 
@@ -163,21 +158,13 @@
 
 
 - (void)editingBegin:(id)sender {
-    if ((sender == tfKmH) || (sender == tfMiH)) {
-        viNumericKeyboard.delegate = sender;
-        [viNumericKeyboard setKeyboardValue:((UITextField *)sender).text];
-        if (sender == tfKmH)
-            uivKm.highlighted = YES;
-        else 
-            uivMi.highlighted = YES;
+    if ((sender == bKmH) || (sender == bMiH)) {
+        viNumericKeyboard.delegate1 = sender;
+        [viNumericKeyboard setKeyboardValue:((CAEditButton *)sender).text];
     }
-    else if ((sender == tfMnKm) || (sender == tfMnMi)) {
-        viDurationKeyboard.delegate = sender;
-        [viDurationKeyboard setKeyboardValue:((UITextField *)sender).text];
-        if (sender == tfMnKm)
-            uivMnKm.highlighted = YES;
-        else
-            uivMnM.highlighted = YES;
+    else if ((sender == bMnKm) || (sender == bMnMi)) {
+        viDurationKeyboard.delegate1 = sender;
+        [viDurationKeyboard setKeyboardValue:((CAEditButton *)sender).text];
     }
     kav.activeControl = sender;
     if (keyboardShown) [self makeTextFieldVisible:nil];
@@ -185,50 +172,46 @@
 
 - (void)convert:(id)sender {
     RCSpeed *speed;
-    if ((sender == tfMiH) || (sender == tfKmH)) {
-        speed = [[RCSpeed alloc] initWithString:((UITextField *)sender).text];
+    if ((sender == bMiH) || (sender == bKmH)) {
+        speed = [[RCSpeed alloc] initWithString:((CAEditButton *)sender).text];
     }
-    else if ((sender == tfMnKm) || (sender == tfMnMi)) {
-        speed = [[RCSpeed alloc] initWithPaceString:((UITextField *)sender).text];        
+    else if ((sender == bMnKm) || (sender == bMnMi)) {
+        speed = [[RCSpeed alloc] initWithPaceString:((CAEditButton *)sender).text];        
     }
-    if (sender == tfKmH) {
+    if (sender == bKmH) {
         RCSpeed *speedMi = [speed toMileH];
-        tfMnKm.text = [speed stringValueForPace];
-        tfMiH.text = [speedMi stringValue];
-        tfMnMi.text = [speedMi stringValueForPace];
+        [bMnKm setTextWithoutValueChangedEvent:[speed stringValueForPace]];
+        [bMiH setTextWithoutValueChangedEvent: [speedMi stringValue]];
+        [bMnMi setTextWithoutValueChangedEvent: [speedMi stringValueForPace]];
     }
-    else if (sender == tfMiH) {
+    else if (sender == bMiH) {
         RCSpeed *speedKm = [speed toKmH];
-        tfMnMi.text = [speed stringValueForPace];
-        tfKmH.text = [speedKm stringValue];
-        tfMnKm.text = [speedKm stringValueForPace];
+        [bMnMi setTextWithoutValueChangedEvent:[speed stringValueForPace]];
+        [bKmH setTextWithoutValueChangedEvent: [speedKm stringValue]];
+        [bMnKm setTextWithoutValueChangedEvent: [speedKm stringValueForPace]];
     }
-    else if (sender == tfMnKm) {
+    else if (sender == bMnKm) {
         RCSpeed *speedMi = [speed toMileH];
-        tfKmH.text = [speed stringValue];
-        tfMiH.text = [speedMi stringValue];
-        tfMnMi.text = [speedMi stringValueForPace];
+        [bKmH setTextWithoutValueChangedEvent: [speed stringValue]];
+        [bMiH setTextWithoutValueChangedEvent: [speedMi stringValue]];
+        [bMnMi setTextWithoutValueChangedEvent: [speedMi stringValueForPace]];
     }
-    else if (sender == tfMnMi) {
+    else if (sender == bMnMi) {
         RCSpeed *speedKm = [speed toKmH];
-        tfMiH.text = [speed stringValue];
-        tfKmH.text = [speedKm stringValue];
-        tfMnKm.text = [speedKm stringValueForPace];
+        [bMiH setTextWithoutValueChangedEvent: [speed stringValue]];
+        [bKmH setTextWithoutValueChangedEvent: [speedKm stringValue]];
+        [bMnKm setTextWithoutValueChangedEvent: [speedKm stringValueForPace]];
     }
 }
 
 - (IBAction)backgroundTouched:(id)sender {
-    [tfKmH resignFirstResponder];
-    [tfMiH resignFirstResponder];
-    [tfMnKm resignFirstResponder];
-    [tfMnMi resignFirstResponder];
+    [bKmH resignFirstResponder];
+    [bMiH resignFirstResponder];
+    [bMnKm resignFirstResponder];
+    [bMnMi resignFirstResponder];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    uivKm.highlighted = NO;
-    uivMi.highlighted = NO;
-    uivMnKm.highlighted = NO;
-    uivMnM.highlighted = NO;
 }
 
 @end

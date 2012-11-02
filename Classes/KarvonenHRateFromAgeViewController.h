@@ -9,22 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "HRateCellView.h"
 #import "NumericKeyboardView.h"
+#import "CAEditButton.h"
 
-@interface KarvonenHRateFromAgeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
-    UITextField *tfAge;
-    UISegmentedControl *scSex;
-    UITextField *tfRestRate;
-    UITableView *tvRates;
-    UITableViewCell *tcHRRate;
-    NSArray *rates;
-    NumericKeyboardView *viNumericKeyboard;
-}
+@interface KarvonenHRateFromAgeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> 
 
-@property (nonatomic) IBOutlet UITextField *tfAge;
-@property (nonatomic) IBOutlet UISegmentedControl *scSex;
-@property (nonatomic) IBOutlet UITextField *tfRestRate;
+@property (nonatomic) IBOutlet CAEditButton *bAge;
+@property (nonatomic) IBOutlet CAEditButton *bRestRate;
+@property (nonatomic) UISegmentedControl *scSex;
 @property (nonatomic) IBOutlet UITableView *tvRates;
-@property (nonatomic) IBOutlet UITableViewCell *tcHRate;
+@property (nonatomic) UITableViewCell *tcHRate;
 @property (nonatomic) NSArray *rates;
 @property (nonatomic) NumericKeyboardView *viNumericKeyboard;
 

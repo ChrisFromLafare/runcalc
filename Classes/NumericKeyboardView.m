@@ -5,16 +5,14 @@
 //  Created by mishanet on 03/05/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
+// 22/10/2012 Modification de l'animation du picker
 
 #import "NumericKeyboardView.h"
 #import <math.h>
 #define WHEELWIDTH 42.0f
-#define NBROWS 10000
+#define MAXROWS 10000
 
-@interface NumericKeyboardView () {
-    UIPickerView *picker;
-    UILabel *lblDecDot;
-}
+@interface NumericKeyboardView () 
 
 @property (nonatomic) IBOutlet UIPickerView *picker;
 @property (nonatomic) IBOutlet UILabel *lblDecDot;
@@ -23,8 +21,9 @@
 
 @implementation NumericKeyboardView
 
-@synthesize delegate, picker, lblDecDot, leadingZeros;
+@synthesize delegate, delegate1, picker, lblDecDot, leadingZeros;
 @dynamic nbDigits, nbFrac;
+
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -96,7 +95,7 @@
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     // Use a large rows number to simulate a cycling wheel
     // By default, add a NBROWS/2 offset to the starting row
-    return  NBROWS;
+    return  MAXROWS;
 }
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
@@ -105,10 +104,8 @@
 }
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    UITextRange *textRange = [delegate 
-                          textRangeFromPosition: [delegate beginningOfDocument]  
-                          toPosition: [delegate endOfDocument]];
     float value = 0;
+
     for (int i=0; i < nbDigits + nbFrac; i++) {
         value = value * 10.0f + [pickerView selectedRowInComponent:i]%10;
     }
@@ -132,30 +129,49 @@
             formatString = [NSString stringWithFormat:@"%%%d.%df", nbDigits+nbFrac+1, nbFrac];
         }
     }
-    [delegate replaceRange: textRange
-                  withText: [NSString localizedStringWithFormat: formatString, value]];               
+    if (delegate) {
+        UITextRange *textRange;
+        textRange = [delegate 
+                        textRangeFromPosition: [delegate beginningOfDocument]  
+                        toPosition: [delegate endOfDocument]];
+        [delegate replaceRange: textRange
+                  withText: [NSString localizedStringWithFormat: formatString, value]]; 
+    
+    }
+    else if (delegate1) 
+        [delegate1 setText:[NSString localizedStringWithFormat:formatString, value]];
+    
+}
+
+// Reset each picker component to the middle
+- (void)calibrate {
+    for (int i=nbFrac+nbDigits-1; i >= 0; i--) {
+        [picker selectRow:MAXROWS/2 + arc4random()%10 inComponent:i animated:NO];
+    }  
 }
 
 - (void)setKeyboardValue:(NSString *)aNumber {
     float f;
+    int num;
+    [self calibrate];
     NSScanner *scan = [NSScanner localizedScannerWithString:aNumber];
     if ([scan scanFloat:&f]) {
         for (int i=0; i< nbFrac; i++) {
             f *= 10;
         }
+        num = (int)roundf(f);
         for (int i=nbFrac+nbDigits-1; i >= 0; i--) {
-            int digit = fmodf(f, 10.0f);
-            [picker selectRow:digit inComponent:i animated:YES];
-            // readjust the offset in order to avoid reaching the limits, make it invisible by removing the animation
-            [picker selectRow:NBROWS/2+digit inComponent:i animated:NO];
-            f /= 10;
+            int digit = num % 10;
+            [picker selectRow:MAXROWS/2 + digit inComponent:i animated:YES];
+            num /= 10;
         }
     }
     else {
         for (int i=0; i < nbDigits+nbFrac; i++) {
-            [picker selectRow:NBROWS/2 inComponent:i animated:YES];
+            [picker selectRow:MAXROWS/2 inComponent:i animated:YES];
         }
     }
+
 }
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {

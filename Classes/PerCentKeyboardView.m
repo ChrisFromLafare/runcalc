@@ -9,7 +9,7 @@
 #import "PerCentKeyboardView.h"
 #import <math.h>
 #define WHEELWIDTH 42.0f
-#define NBROWS 10000
+#define MAXROWS 10000
 
 @interface PerCentKeyboardView () {
     UIPickerView *picker;
@@ -57,7 +57,7 @@
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     // Use a large rows number to simulate a cycling wheel
     // By default, add a NBROWS/2 offset to the starting row
-    return  NBROWS;
+    return  MAXROWS;
 }
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
@@ -83,21 +83,28 @@
                              (leadingZeros == YES)?@"%03d":@"%3d", value]];               
 }
 
+// Reset each picker component to the middle 
+// readjust the offset in order to avoid reaching the limits, make it invisible by removing the animation
+- (void)calibrate {
+    for (int i=0; i < 3; i++) {
+        [picker selectRow:MAXROWS/2 + arc4random()%10 inComponent:i animated:NO];
+    }    
+}
+
 - (void)setKeyboardValue:(NSString *)aNumber {
     int f;
+    [self calibrate];
     NSScanner *scan = [NSScanner localizedScannerWithString:aNumber];
     if ([scan scanInt :&f]) {
-        for (int i=3; i >= 0; i--) {
+        for (int i=2; i >= 0; i--) {
             int digit = f % 10;
-            [picker selectRow:digit inComponent:i animated:YES];
-            // readjust the offset in order to avoid reaching the limits, make it invisible by removing the animation
-            [picker selectRow:NBROWS/2+digit inComponent:i animated:NO];
+            [picker selectRow:MAXROWS/2+digit inComponent:i animated:YES];
             f /= 10;
         }
     }
     else {
         for (int i=0; i < 3; i++) {
-            [picker selectRow:NBROWS/2 inComponent:i animated:YES];
+            [picker selectRow:MAXROWS/2 inComponent:i animated:YES];
         }
     }
 }

@@ -7,19 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CAEditButton.h"
 #import "HRateCellView.h"
 #import "NumericKeyboardView.h"
 
 @interface SimpleHRateFromAgeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate> {
-    UITextField *tfAge;
-    UISegmentedControl *scSex;
-    UITableView *tvRates;
-    UITableViewCell *tcHRRate;
-    NSArray *rates;
-    NumericKeyboardView *viNumericKeyboard;
+//    UITextField *tfAge;
+//    UISegmentedControl *scSex;
+//    UITableView *tvRates;
+//    UITableViewCell *tcHRRate;
+//    NSArray *rates;
+//    NumericKeyboardView *viNumericKeyboard;
 }
 
-@property (nonatomic) IBOutlet UITextField *tfAge;
+@property (nonatomic) IBOutlet CAEditButton *bAge;
 @property (nonatomic) IBOutlet UISegmentedControl *scSex;
 @property (nonatomic) IBOutlet UITableView *tvRates;
 @property (nonatomic) IBOutlet UITableViewCell *tcHRate;

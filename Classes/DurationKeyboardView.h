@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CAEditableItem.h"
 
 @interface DurationKeyboardView : UIView <UIPickerViewDelegate, UIPickerViewDataSource>  {
     id <UITextInput> __unsafe_unretained delegate;
 }
 
 @property (nonatomic, unsafe_unretained) id <UITextInput> delegate;
+@property (nonatomic, unsafe_unretained) id <CAEditableItem> delegate1;
 
 -(void) setKeyboardValue:(NSString *)aString;
 @end
