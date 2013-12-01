@@ -47,7 +47,12 @@
 		AA1C8347161B45D000F4F0DA /* RunCalc-BgAccessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA1C8343161B45D000F4F0DA /* RunCalc-BgAccessory@2x.png */; };
 		AA1C8348161B45D000F4F0DA /* RunCalc-ButtonAccessory.png in Resources */ = {isa = PBXBuildFile; fileRef = AA1C8344161B45D000F4F0DA /* RunCalc-ButtonAccessory.png */; };
 		AA1C8349161B45D000F4F0DA /* RunCalc-ButtonAccessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA1C8345161B45D000F4F0DA /* RunCalc-ButtonAccessory@2x.png */; };
+		AA5A055A184BB40100BD9CA6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA5A0559184BB40100BD9CA6 /* Default-568h@2x.png */; };
+		AA639EBE164B9F1E007623BD /* StartTrainingPlanDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA639EBC164B9F1E007623BD /* StartTrainingPlanDateViewController.m */; };
+		AA639EBF164B9F1E007623BD /* StartTrainingPlanDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA639EBD164B9F1E007623BD /* StartTrainingPlanDateViewController.xib */; };
 		AA94809115ADA1C00067B36B /* RunCalcViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA94809015ADA1C00067B36B /* RunCalcViewController.xib */; };
+		AAB955CF164582A000B4E99E /* DateKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAB955CE164582A000B4E99E /* DateKeyboardView.xib */; };
+		AAB955D21646DE4100B4E99E /* RCDate.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB955D11646DE4100B4E99E /* RCDate.m */; };
 		AAC3531B161DD849005A95CA /* KeyboardAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC35319161DD848005A95CA /* KeyboardAccessoryView.m */; };
 		AAC3531C161DD849005A95CA /* KeyboardAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAC3531A161DD849005A95CA /* KeyboardAccessoryView.xib */; };
 		AADA6AC516331211007813F3 /* CAEditButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AADA6AC416331211007813F3 /* CAEditButton.m */; };
@@ -59,6 +64,11 @@
 		AAE78AA21642A530002E0889 /* IconHeart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE78A9E1642A530002E0889 /* IconHeart@2x.png */; };
 		AAE78AA31642A530002E0889 /* IconRuler.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE78A9F1642A530002E0889 /* IconRuler.png */; };
 		AAE78AA41642A530002E0889 /* IconRuler@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE78AA01642A530002E0889 /* IconRuler@2x.png */; };
+		AAE78AA91643ADF3002E0889 /* DateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE78AA71643ADF2002E0889 /* DateTableViewController.m */; };
+		AAE78AAA1643ADF3002E0889 /* DateTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAE78AA81643ADF3002E0889 /* DateTableViewController.xib */; };
+		AAE78AAF1644F2F5002E0889 /* NbDaysToDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE78AAD1644F2F5002E0889 /* NbDaysToDateViewController.m */; };
+		AAE78AB01644F2F5002E0889 /* NbDaysToDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAE78AAE1644F2F5002E0889 /* NbDaysToDateViewController.xib */; };
+		AAE78AB31644FAF9002E0889 /* DateKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE78AB21644FAF9002E0889 /* DateKeyboardView.m */; };
 		AAFA7D4B16231996000DDE4F /* RunCalc-Cell44.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFA7D4916231996000DDE4F /* RunCalc-Cell44.png */; };
 		AAFA7D4C16231996000DDE4F /* RunCalc-Cell44@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFA7D4A16231996000DDE4F /* RunCalc-Cell44@2x.png */; };
 		AAFA7D50162329FD000DDE4F /* CustomColoredAccessory.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFA7D4F162329FD000DDE4F /* CustomColoredAccessory.m */; };
@@ -151,7 +161,14 @@
 		AA1C8344161B45D000F4F0DA /* RunCalc-ButtonAccessory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-ButtonAccessory.png"; sourceTree = "<group>"; };
 		AA1C8345161B45D000F4F0DA /* RunCalc-ButtonAccessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-ButtonAccessory@2x.png"; sourceTree = "<group>"; };
 		AA1F41FD16343B6F00C473F9 /* CAEditableItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CAEditableItem.h; sourceTree = "<group>"; };
+		AA5A0559184BB40100BD9CA6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		AA639EBB164B9F1E007623BD /* StartTrainingPlanDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartTrainingPlanDateViewController.h; sourceTree = "<group>"; };
+		AA639EBC164B9F1E007623BD /* StartTrainingPlanDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartTrainingPlanDateViewController.m; sourceTree = "<group>"; };
+		AA639EBD164B9F1E007623BD /* StartTrainingPlanDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartTrainingPlanDateViewController.xib; sourceTree = "<group>"; };
 		AA94809015ADA1C00067B36B /* RunCalcViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RunCalcViewController.xib; sourceTree = "<group>"; };
+		AAB955CE164582A000B4E99E /* DateKeyboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DateKeyboardView.xib; path = Classes/DateKeyboardView.xib; sourceTree = "<group>"; };
+		AAB955D01646DE4100B4E99E /* RCDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDate.h; sourceTree = "<group>"; };
+		AAB955D11646DE4100B4E99E /* RCDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDate.m; sourceTree = "<group>"; };
 		AAC35318161DD6A2005A95CA /* KeyboardAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardAccessoryView.h; sourceTree = "<group>"; };
 		AAC35319161DD848005A95CA /* KeyboardAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardAccessoryView.m; sourceTree = "<group>"; };
 		AAC3531A161DD849005A95CA /* KeyboardAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardAccessoryView.xib; sourceTree = "<group>"; };
@@ -165,6 +182,14 @@
 		AAE78A9E1642A530002E0889 /* IconHeart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IconHeart@2x.png"; sourceTree = "<group>"; };
 		AAE78A9F1642A530002E0889 /* IconRuler.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconRuler.png; sourceTree = "<group>"; };
 		AAE78AA01642A530002E0889 /* IconRuler@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IconRuler@2x.png"; sourceTree = "<group>"; };
+		AAE78AA61643ADF2002E0889 /* DateTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTableViewController.h; sourceTree = "<group>"; };
+		AAE78AA71643ADF2002E0889 /* DateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateTableViewController.m; sourceTree = "<group>"; };
+		AAE78AA81643ADF3002E0889 /* DateTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DateTableViewController.xib; sourceTree = "<group>"; };
+		AAE78AAC1644F2F5002E0889 /* NbDaysToDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NbDaysToDateViewController.h; sourceTree = "<group>"; };
+		AAE78AAD1644F2F5002E0889 /* NbDaysToDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NbDaysToDateViewController.m; sourceTree = "<group>"; };
+		AAE78AAE1644F2F5002E0889 /* NbDaysToDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NbDaysToDateViewController.xib; sourceTree = "<group>"; };
+		AAE78AB11644FAF9002E0889 /* DateKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DateKeyboardView.h; path = Classes/DateKeyboardView.h; sourceTree = "<group>"; };
+		AAE78AB21644FAF9002E0889 /* DateKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DateKeyboardView.m; path = Classes/DateKeyboardView.m; sourceTree = "<group>"; };
 		AAFA7D4916231996000DDE4F /* RunCalc-Cell44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-Cell44.png"; sourceTree = "<group>"; };
 		AAFA7D4A16231996000DDE4F /* RunCalc-Cell44@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunCalc-Cell44@2x.png"; sourceTree = "<group>"; };
 		AAFA7D4E162329FD000DDE4F /* CustomColoredAccessory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomColoredAccessory.h; sourceTree = "<group>"; };
@@ -234,6 +259,7 @@
 		29B97314FDCFA39411CA2CEA /* RunCalc */ = {
 			isa = PBXGroup;
 			children = (
+				AA5A0559184BB40100BD9CA6 /* Default-568h@2x.png */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				45C52641155A94E600168E93 /* Tabs */,
 				45D7C0EE1556C42B00D90729 /* Keyboards */,
@@ -343,6 +369,10 @@
 				458207041575216900C4C54F /* Single HRate from Age */,
 				45BB9BC21566071B00472168 /* Simple HRate from HRM */,
 				45BB9BC915660E7E00472168 /* Karvonen HRate from Age & Sex */,
+				AAE78AA61643ADF2002E0889 /* DateTableViewController.h */,
+				AAE78AA71643ADF2002E0889 /* DateTableViewController.m */,
+				AAE78AA81643ADF3002E0889 /* DateTableViewController.xib */,
+				AAE78AAB1644F24F002E0889 /* Date Calculator */,
 			);
 			name = Tabs;
 			path = Classes;
@@ -383,6 +413,9 @@
 				AAC35318161DD6A2005A95CA /* KeyboardAccessoryView.h */,
 				AAC35319161DD848005A95CA /* KeyboardAccessoryView.m */,
 				AAC3531A161DD849005A95CA /* KeyboardAccessoryView.xib */,
+				AAE78AB11644FAF9002E0889 /* DateKeyboardView.h */,
+				AAE78AB21644FAF9002E0889 /* DateKeyboardView.m */,
+				AAB955CE164582A000B4E99E /* DateKeyboardView.xib */,
 			);
 			name = Keyboards;
 			sourceTree = "<group>";
@@ -400,6 +433,19 @@
 				AAE78A80164261A8002E0889 /* IconAppli@2x.png */,
 			);
 			name = Icons;
+			sourceTree = "<group>";
+		};
+		AAE78AAB1644F24F002E0889 /* Date Calculator */ = {
+			isa = PBXGroup;
+			children = (
+				AAE78AAC1644F2F5002E0889 /* NbDaysToDateViewController.h */,
+				AAE78AAD1644F2F5002E0889 /* NbDaysToDateViewController.m */,
+				AAE78AAE1644F2F5002E0889 /* NbDaysToDateViewController.xib */,
+				AA639EBB164B9F1E007623BD /* StartTrainingPlanDateViewController.h */,
+				AA639EBC164B9F1E007623BD /* StartTrainingPlanDateViewController.m */,
+				AA639EBD164B9F1E007623BD /* StartTrainingPlanDateViewController.xib */,
+			);
+			name = "Date Calculator";
 			sourceTree = "<group>";
 		};
 		AAFA7D4D162329AB000DDE4F /* Utilities */ = {
@@ -465,6 +511,8 @@
 				45D33BE5154BB9B200671FCB /* RCDistance.m */,
 				45BB9BB91564F60600472168 /* RCHeartRate.h */,
 				45BB9BBA1564F60600472168 /* RCHeartRate.m */,
+				AAB955D01646DE4100B4E99E /* RCDate.h */,
+				AAB955D11646DE4100B4E99E /* RCDate.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -476,6 +524,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "RunCalc" */;
 			buildPhases = (
+				AAE78AA516439F2B002E0889 /* ShellScript */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
@@ -577,10 +626,31 @@
 				AAE78AA21642A530002E0889 /* IconHeart@2x.png in Resources */,
 				AAE78AA31642A530002E0889 /* IconRuler.png in Resources */,
 				AAE78AA41642A530002E0889 /* IconRuler@2x.png in Resources */,
+				AAE78AAA1643ADF3002E0889 /* DateTableViewController.xib in Resources */,
+				AAE78AB01644F2F5002E0889 /* NbDaysToDateViewController.xib in Resources */,
+				AAB955CF164582A000B4E99E /* DateKeyboardView.xib in Resources */,
+				AA639EBF164B9F1E007623BD /* StartTrainingPlanDateViewController.xib in Resources */,
+				AA5A055A184BB40100BD9CA6 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AAE78AA516439F2B002E0889 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\necho \"Plist: $PRODUCT_SETTINGS_PATH\"\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$PRODUCT_SETTINGS_PATH\")\necho \"build1: $buildNumber\"\nbuildNumber=$(($buildNumber + 1))\necho \"build2: $buildNumber\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\"  \"$PRODUCT_SETTINGS_PATH\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
@@ -609,6 +679,11 @@
 				AAC3531B161DD849005A95CA /* KeyboardAccessoryView.m in Sources */,
 				AAFA7D50162329FD000DDE4F /* CustomColoredAccessory.m in Sources */,
 				AADA6AC516331211007813F3 /* CAEditButton.m in Sources */,
+				AAE78AA91643ADF3002E0889 /* DateTableViewController.m in Sources */,
+				AAE78AAF1644F2F5002E0889 /* NbDaysToDateViewController.m in Sources */,
+				AAE78AB31644FAF9002E0889 /* DateKeyboardView.m in Sources */,
+				AAB955D21646DE4100B4E99E /* RCDate.m in Sources */,
+				AA639EBE164B9F1E007623BD /* StartTrainingPlanDateViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

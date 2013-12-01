@@ -12,7 +12,7 @@
 @implementation RunCalcAppDelegate
 
 @synthesize window;
-@synthesize tabBarController, convertTableViewController, hRateTableViewController;
+@synthesize tabBarController, convertTableViewController, hRateTableViewController, dateTableViewController;
 
 
 #pragma mark -
